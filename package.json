@@ -1,0 +1,36 @@
+{
+  "name": "todo-list-contato-seguro",
+  "version": "1.0.0",
+  "description": "To-Do List Application",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "dev": "npx tsx src/index.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Gabrielsoac/desafio-to-do-list-contato-seguro.git"
+  },
+  "author": "Gabriel Soares",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Gabrielsoac/desafio-to-do-list-contato-seguro/issues"
+  },
+  "homepage": "https://github.com/Gabrielsoac/desafio-to-do-list-contato-seguro#readme",
+  "dependencies": {
+    "@types/jest": "^29.5.14",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "http-status-codes": "^2.3.0",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.2.5",
+    "tsx": "^4.19.2",
+    "yup": "^1.6.1"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.0",
+    "eslint": "^9.19.0",
+    "typescript": "^5.7.3",
+    "typescript-eslint": "^8.23.0"
+  }
+}
