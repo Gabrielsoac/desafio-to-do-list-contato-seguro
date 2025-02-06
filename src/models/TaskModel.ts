@@ -1,4 +1,4 @@
-import { model, Schema } from "mongoose"
+import mongoose, { model, Schema } from "mongoose"
 import { TTaskProps } from "../domain/entities/task/TTaskProps"
 import { TaskStatus } from "../domain/entities/task/EnumTaskStatus";
 
@@ -12,6 +12,7 @@ const taskSchema = new Schema<TTaskProps>(
             required: true,
             default: TaskStatus.PENDING,
         },
+        user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true }
     }, { timestamps: true }
 );
 
