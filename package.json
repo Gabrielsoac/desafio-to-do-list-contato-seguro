@@ -19,6 +19,7 @@
   "homepage": "https://github.com/Gabrielsoac/desafio-to-do-list-contato-seguro#readme",
   "dependencies": {
     "@types/jest": "^29.5.14",
+    "cors": "^2.8.5",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "http-status-codes": "^2.3.0",
@@ -30,6 +31,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.19.0",
+    "@types/cors": "^2.8.17",
     "@types/express": "^5.0.0",
     "eslint": "^9.19.0",
     "globals": "^15.14.0",
