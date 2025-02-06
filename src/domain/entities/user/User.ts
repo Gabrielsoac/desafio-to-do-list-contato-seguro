@@ -1,4 +1,3 @@
-import { Task } from "../task/Task"
 import { TUserProps } from "./TUserProps";
 
 export class User {
@@ -12,10 +11,9 @@ export class User {
     public static create(
         name: string,
         email: string,
-        password: string,
-        tasks: Task[]) {
+        password: string) {
 
-        return new  User({name, email, password, tasks});
+        return new User({name, email, password});
     }
 
     public getName(){
@@ -31,12 +29,6 @@ export class User {
     public getPassword(){
         return this.props.password;
     }
-
-
-    public getTasks(){
-        return this.props.tasks;
-    }
-
 }
 
 
