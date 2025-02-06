@@ -1,7 +1,7 @@
 import { User } from "../user/User"
 import { TaskStatus } from "./EnumTaskStatus"
 
-export type ITaskProps = {
+export type TTaskProps = {
     title: string;
     description?: string;
     status: TaskStatus;

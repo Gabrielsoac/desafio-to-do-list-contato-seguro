@@ -1,25 +1,25 @@
 import { User } from "../user/User";
 import { TaskStatus } from "./EnumTaskStatus";
-import { ITaskProps } from "./ITaskProps";
+import { TTaskProps } from "./TTaskProps";
 
 export class Task {
 
-    private props: ITaskProps;
+    private props: TTaskProps;
 
-    private constructor(props: ITaskProps) {
+    private constructor(props: TTaskProps) {
         this.props = props;
     }
 
     public static create(
         title: string,
         description: string,
-        status: TaskStatus,
-        user: User){
-
-        return new Task({title, description, status, user});
+        user: User,
+        status: TaskStatus){
+            
+        return new Task({title, description, status, user });
     }
 
-    public static createWith(props: ITaskProps){
+    public static createWith(props: TTaskProps){
         return new Task(props);
     }
 

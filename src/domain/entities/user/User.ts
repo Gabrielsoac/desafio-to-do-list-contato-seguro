@@ -1,17 +1,11 @@
 import { Task } from "../task/Task"
-
-export type IUserProps = {
-    name: string,
-    email: string,
-    password: string,
-    tasks: Task[]
-}
+import { TUserProps } from "./TUserProps";
 
 export class User {
 
-    private props: IUserProps;
+    private props: TUserProps;
 
-    private constructor(props: IUserProps){
+    private constructor(props: TUserProps){
         this.props = props;
     }
 
