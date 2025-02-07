@@ -14,7 +14,6 @@ export class CreateUser implements IUseCase<TCreateUserRequestDto, TUserResponse
 
     public static create(userRepository: IUserRepository){
         return new CreateUser(userRepository);
-
     }
     
     async execute(input: TCreateUserRequestDto): Promise<TUserResponseDto> {
