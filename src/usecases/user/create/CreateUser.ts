@@ -1,10 +1,10 @@
 import { User } from "../../../domain/entities/user/User";
 import { IUserRepository } from "../../../repository/user/IUserRepository";
 import { IUseCase } from "../../IUseCase";
-import { ICreateUserRequestDto } from "./TCreateUserRequestDto";
-import { ICreateUserResponseDto } from "./TCreateUserResponseDto";
+import { TCreateUserRequestDto } from "./TCreateUserRequestDto";
+import { TUserResponseDto } from "../TUserResponseDto";
 
-export class CreateUser implements IUseCase<ICreateUserRequestDto, ICreateUserResponseDto> {
+export class CreateUser implements IUseCase<TCreateUserRequestDto, TUserResponseDto> {
     
     private userRepository: IUserRepository;
 
@@ -17,7 +17,7 @@ export class CreateUser implements IUseCase<ICreateUserRequestDto, ICreateUserRe
 
     }
     
-    async execute(input: ICreateUserRequestDto): Promise<ICreateUserResponseDto> {
+    async execute(input: TCreateUserRequestDto): Promise<TUserResponseDto> {
         try {
             const user = User.create(input.name, input.email, input.password);
             const persistedUser = await this.userRepository.createUser(user);
