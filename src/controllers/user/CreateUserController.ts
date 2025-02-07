@@ -15,7 +15,9 @@ export const CreateUserController = async (
     try {
         console.log("Passei pelo controller");
         const user = await createUser.execute(req.body);
-        res.status(StatusCodes.OK).json(user);
+        const locationUrl = `${req.protocol}://${req.get('host')}/user/${user.id}`;
+
+        res.status(StatusCodes.CREATED).location(locationUrl).json(user);
     } 
     catch (err){
         throw new Error(`Erro ao tentar criar usuário: ${(err as Error).message}`);
