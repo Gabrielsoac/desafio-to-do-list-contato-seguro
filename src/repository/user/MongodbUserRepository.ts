@@ -30,8 +30,25 @@ export class MongodbUserRepository implements IUserRepository {
     }
     
     public async findById(id: string): Promise<TPersistedUser> {
-        throw new Error("Method not implemented.");
+        try {
+            
+            const user = await UserModel.findById(id);
+
+            if(!user) {
+                throw new Error(`Usuário com o id: ${id} não encontrado!`);
+            } else {
+                return {
+                    id: user._id.toString(),
+                    name: user.name,
+                    email: user.email
+                };
+            }
+        } 
+        catch (err) {
+            throw new Error(`Usuário não encontrado: ${(err as Error).message}`);
+        }
     }
+
     public async findAll(): Promise<TPersistedUser[]> {
         throw new Error("Method not implemented.");
     }
