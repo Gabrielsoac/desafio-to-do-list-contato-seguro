@@ -19,6 +19,7 @@
   "homepage": "https://github.com/Gabrielsoac/desafio-to-do-list-contato-seguro#readme",
   "dependencies": {
     "@types/jest": "^29.5.14",
+    "@types/mongoose": "^5.11.97",
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",

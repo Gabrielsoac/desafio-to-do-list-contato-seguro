@@ -1,5 +1,4 @@
-import { User } from "../user/User";
-import { TaskStatus } from "./EnumTaskStatus";
+import mongoose from "mongoose";
 import { TTaskProps } from "./TTaskProps";
 
 export class Task {
@@ -13,10 +12,9 @@ export class Task {
     public static create(
         title: string,
         description: string,
-        user: User,
-        status: TaskStatus){
+        user: mongoose.Types.ObjectId){
             
-        return new Task({title, description, status, user });
+        return new Task({title, description, user});
     }
 
     public static createWith(props: TTaskProps){

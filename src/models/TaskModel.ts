@@ -12,10 +12,16 @@ const taskSchema = new Schema<TTaskProps>(
             required: true,
             default: TaskStatus.PENDING,
         },
-        user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true }
-    }, { timestamps: true }
+        user: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User', required: true }
+    },
+    { 
+        timestamps: {
+            createdAt: 'createdAt',
+            updatedAt: 'updatedAt'
+        }
+    }
 );
 
-const TaskModel = model<TTaskProps>('Task', taskSchema);
-
-export { TaskModel };
+export const TaskModel = model<TTaskProps>('Task', taskSchema);

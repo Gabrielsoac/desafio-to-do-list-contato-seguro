@@ -4,6 +4,7 @@ export interface IResponseCreateTaskDto {
     title: string,
     description: string,
     status: TaskStatus,
-    createdAt: Date,
     userID: string,
+    createdAt: Date,
+    updatedAt: Date
 }
