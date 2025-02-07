@@ -26,7 +26,6 @@ export class MongodbUserRepository implements IUserRepository {
         } catch(err) {
             throw new Error(`Erro ao salvar usuário: ${(err as Error).message}`);
         }
-
     }
     
     public async findById(id: string): Promise<TPersistedUser> {
@@ -50,7 +49,22 @@ export class MongodbUserRepository implements IUserRepository {
     }
 
     public async findAll(): Promise<TPersistedUser[]> {
-        throw new Error("Method not implemented.");
+        
+        try {
+            const users = await UserModel.find();
+
+            const usersDto = users.map(
+                user => ({
+                    id: user._id.toString(),
+                    name: user.name,
+                    email: user.email,
+                })
+            );
+
+            return usersDto;
+        } catch(err) {
+            throw new Error((err as Error).message);
+        }
     }
     
     public async updateUser(userUpdateData: TUpdateUserRequestDto): Promise<TPersistedUser> {
