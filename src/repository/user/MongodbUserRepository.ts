@@ -68,10 +68,46 @@ export class MongodbUserRepository implements IUserRepository {
     }
     
     public async updateUser(userUpdateData: TUpdateUserRequestDto): Promise<TPersistedUser> {
-        throw new Error("Method not implemented.");
+        
+        try {
+            const user = await UserModel.findByIdAndUpdate(
+                {
+                    _id: userUpdateData.id,
+                },
+                {
+                    name: userUpdateData.name,
+                    email: userUpdateData.email,
+                    password: userUpdateData.password
+
+                },
+                {
+                    new: true,
+                    runValidators: true
+                }
+            );
+
+            if(!user) {
+                throw new Error("Erro ao atualizar usuário");
+            }
+
+            return {
+                id: user._id.toString(),
+                name: user.name,
+                email: user.email,
+            }
+        }
+
+        catch(err){
+            throw new Error((err as Error).message);
+        }
     }
     
     public async deleteUser(id: string): Promise<void> {
-        throw new Error("Method not implemented.");
+        try {
+            UserModel.findByIdAndDelete(id);
+        } 
+        catch(err){
+            throw new Error((err as Error).message);
+        }
     }
 }

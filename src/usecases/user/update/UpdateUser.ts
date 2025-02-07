@@ -3,7 +3,7 @@ import { IUseCase } from "../../IUseCase";
 import { TUserResponseDto } from "../TUserResponseDto";
 import { TUpdateUserRequestDto } from "./TUpdateUserRequestDto";
 
-export class UpdateUser implements IUseCase<TUpdateUserRequestDto, TUserResponseDto> {
+export class UpdateUserById implements IUseCase<TUpdateUserRequestDto, TUserResponseDto> {
 
     private userRepository: IUserRepository;
 
@@ -11,9 +11,8 @@ export class UpdateUser implements IUseCase<TUpdateUserRequestDto, TUserResponse
         this.userRepository = userRepository;
     }
 
-
     public static create(userRepository: IUserRepository){
-        return new UpdateUser(userRepository);
+        return new UpdateUserById(userRepository);
 
     }
 
