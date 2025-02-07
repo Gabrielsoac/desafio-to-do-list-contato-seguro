@@ -10,7 +10,13 @@ export class MongodbUserRepository implements IUserRepository {
     public async createUser(user: User): Promise<TPersistedUser> {
         
         try {
-            const userPersisted = await UserModel.create(user);
+            const userPersisted = await UserModel.create(
+                {
+                name: user.getName(),
+                email: user.getEmail(),
+                password: user.getPassword()
+                }
+            );
 
             return {
                 id: userPersisted._id.toString(),
@@ -20,7 +26,7 @@ export class MongodbUserRepository implements IUserRepository {
         } catch(err) {
             throw new Error(`Erro ao salvar usuário: ${(err as Error).message}`);
         }
-        
+
     }
     
     public async findById(id: string): Promise<TPersistedUser> {

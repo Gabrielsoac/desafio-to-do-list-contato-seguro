@@ -19,8 +19,12 @@ export class CreateUser implements IUseCase<TCreateUserRequestDto, TUserResponse
     async execute(input: TCreateUserRequestDto): Promise<TUserResponseDto> {
         try {
             const user = User.create(input.name, input.email, input.password);
+
             const persistedUser = await this.userRepository.createUser(user);
 
+            console.log("consegui ser salvo no db");
+            console.log(persistedUser);
+            
             return {...persistedUser}
             
         } catch(err){
