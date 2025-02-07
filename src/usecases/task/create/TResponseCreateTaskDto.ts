@@ -1,6 +1,6 @@
 import { TaskStatus } from "../../../domain/entities/task/EnumTaskStatus";
 
-export interface IResponseCreateTaskDto {
+export type TResponseCreateTaskDto = {
     title: string,
     description: string,
     status: TaskStatus,

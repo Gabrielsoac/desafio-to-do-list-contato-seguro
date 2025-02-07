@@ -12,7 +12,7 @@ const findUserById = FindUserById.create(userRepository);
 
 export const GetUserByIdController = async (
     req: Request<TFindUserRequestDto, {}, {}>,
-    res: Response<TUserResponseDto| TErrorResponseDto>) => {
+    res: Response<TUserResponseDto | TErrorResponseDto>) => {
 
     try {
         const user = await findUserById
@@ -21,7 +21,7 @@ export const GetUserByIdController = async (
             );
 
         res.status(StatusCodes.OK).json(user);
-        
+
     } catch(err){
 
         const error = {

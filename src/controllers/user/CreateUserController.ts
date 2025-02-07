@@ -24,7 +24,6 @@ export const CreateUserController = async (
             code: StatusCodes.BAD_REQUEST,
             message: (err as Error).message,
         }
-
         res.status(StatusCodes.BAD_REQUEST).json(error);
     }
 }

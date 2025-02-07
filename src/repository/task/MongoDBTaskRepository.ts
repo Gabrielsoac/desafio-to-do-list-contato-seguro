@@ -9,15 +9,28 @@ export class MongoDBTaskRepository implements ITaskRepository {
    
     async save(task: Task): Promise<TTaskPersistedProps> {
         
-        const taskPersisted = await TaskModel.create(task);
-        return {
-            id: taskPersisted._id.toString(),
-            title: taskPersisted.title,
-            description: taskPersisted.description || "",
-            status: taskPersisted.status || TaskStatus.PENDING,
-            userID: taskPersisted.user._id.toString(),
-            createdAt: taskPersisted.createdAt || new Date(),
-            updatedAt: taskPersisted.updatedAt || new Date()
+        try {
+            const taskPersisted = await TaskModel.create({
+                title: task.getTitle(),
+                description: task.getDescription(),
+                status: TaskStatus.PENDING,
+                user: task.getUser()
+
+            });
+            
+            return {
+                id: taskPersisted._id.toString(),
+                title: taskPersisted.title,
+                description: taskPersisted.description || "",
+                status: taskPersisted.status || TaskStatus.PENDING,
+                userID: taskPersisted.user._id.toString(),
+                createdAt: taskPersisted.createdAt || new Date(),
+                updatedAt: taskPersisted.updatedAt || new Date()
+            } 
+        } 
+        
+        catch(err){
+            throw new Error((err as Error).message);
         }
     }
     
