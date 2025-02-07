@@ -4,7 +4,7 @@ import { TUserResponseDto } from "../../usecases/user/TUserResponseDto";
 import { StatusCodes } from "http-status-codes";
 import { CreateUser } from "../../usecases/user/create/CreateUser";
 import { MongodbUserRepository } from "../../repository/user/MongodbUserRepository";
-import { TErrorResponseDto } from "../TErrorResponseDto";
+import { TErrorResponseDto } from "../TErrorResponse";
 
 const userRepository = new MongodbUserRepository;
 const createUser = CreateUser.create(userRepository); 

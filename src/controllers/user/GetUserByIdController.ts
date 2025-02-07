@@ -5,7 +5,7 @@ import { FindUserById } from "../../usecases/user/findOne/FindUserById";
 import { TFindUserRequestDto } from "../../usecases/user/findOne/TFindUserRequest";
 import { StatusCodes } from "http-status-codes";
 import { TUserResponseDto } from "../../usecases/user/TUserResponseDto";
-import { TErrorResponseDto } from "../TErrorResponseDto";
+import { TErrorResponseDto } from "../TErrorResponse";
 
 const userRepository = new MongodbUserRepository;
 const findUserById = FindUserById.create(userRepository);

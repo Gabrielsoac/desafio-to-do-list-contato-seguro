@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { User } from "../../domain/entities/user/User";
 import { UserModel } from "../../models/UserModel";
 import { TUpdateUserRequestDto } from "../../usecases/user/update/TUpdateUserRequestDto";

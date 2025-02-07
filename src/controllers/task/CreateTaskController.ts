@@ -5,7 +5,7 @@ import { TResponseCreateTaskDto } from "../../usecases/task/create/TResponseCrea
 import { CreateTask } from "../../usecases/task/create/CreateTask";
 import { MongoDBTaskRepository } from "../../repository/task/MongoDBTaskRepository";
 import { StatusCodes } from "http-status-codes";
-import { TErrorResponseDto } from "../TErrorResponseDto";
+import { TErrorResponseDto } from "../TErrorResponse";
 
 const mongodb = new MongoDBTaskRepository;
 const createTaskCase = CreateTask.create(mongodb);

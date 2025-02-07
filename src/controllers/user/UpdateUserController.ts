@@ -5,7 +5,7 @@ import { TUserResponseDto } from "../../usecases/user/TUserResponseDto";
 import { TFindUserRequestDto } from "../../usecases/user/findOne/TFindUserRequest";
 import { UpdateUserById } from "../../usecases/user/update/UpdateUser";
 import { MongodbUserRepository } from "../../repository/user/MongodbUserRepository";
-import { TErrorResponseDto } from "../TErrorResponseDto";
+import { TErrorResponseDto } from "../TErrorResponse";
 import { StatusCodes } from "http-status-codes";
 
 export const UpdateUserController = async (

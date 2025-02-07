@@ -3,7 +3,7 @@ import { TUsersResponseDto } from "../../usecases/user/findAll/TUsersResponseDto
 import { FindAllUsers } from "../../usecases/user/findAll/FindAllUsers";
 import { MongodbUserRepository } from "../../repository/user/MongodbUserRepository";
 import { StatusCodes } from "http-status-codes";
-import { TErrorResponseDto } from "../TErrorResponseDto";
+import { TErrorResponseDto } from "../TErrorResponse";
 
 export const GetUsersController = async (
     req: Request<void>,
