@@ -3,7 +3,7 @@ import { TaskStatus } from "../../domain/entities/task/EnumTaskStatus";
 import { Task } from "../../domain/entities/task/Task";
 import { TaskModel } from "../../models/TaskModel";
 import { ITaskRepository } from "./ITaskRepository";
-import { TTaskPersistedProps } from "./TTaskPersistedProps";
+import { TTaskPersistedProps } from "./TPersistedTask";
 
 export class MongoDBTaskRepository implements ITaskRepository {
    
@@ -15,7 +15,7 @@ export class MongoDBTaskRepository implements ITaskRepository {
             title: taskPersisted.title,
             description: taskPersisted.description || "",
             status: taskPersisted.status || TaskStatus.PENDING,
-            user: taskPersisted.user._id.toString(),
+            userID: taskPersisted.user._id.toString(),
             createdAt: taskPersisted.createdAt || new Date(),
             updatedAt: taskPersisted.updatedAt || new Date()
         }
@@ -32,5 +32,4 @@ export class MongoDBTaskRepository implements ITaskRepository {
     async deleteTask(task: Task): Promise<void> {
         
     }
-
 }

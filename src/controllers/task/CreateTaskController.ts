@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import { IRequestCreateTaskDto } from "../../usecases/task/create/IRequestCreateTaskDto";
-import { IResponseCreateTaskDto } from "../../usecases/task/create/IResponseCreateTaskDto";
+import { IRequestCreateTaskDto } from "../../usecases/task/create/TRequestCreateTaskDto";
+import { IResponseCreateTaskDto } from "../../usecases/task/create/TResponseCreateTaskDto";
 import { CreateTask } from "../../usecases/task/create/CreateTask";
 import { MongoDBTaskRepository } from "../../repository/task/MongoDBTaskRepository";
 import { StatusCodes } from "http-status-codes";

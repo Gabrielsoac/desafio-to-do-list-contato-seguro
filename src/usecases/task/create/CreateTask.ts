@@ -1,8 +1,8 @@
 import { Task } from "../../../domain/entities/task/Task";
 import { ITaskRepository } from "../../../repository/task/ITaskRepository";
 import { IUseCase } from "../../IUseCase";
-import { IRequestCreateTaskDto } from "./IRequestCreateTaskDto";
-import { IResponseCreateTaskDto } from "./IResponseCreateTaskDto";
+import { IRequestCreateTaskDto } from "./TRequestCreateTaskDto";
+import { IResponseCreateTaskDto } from "./TResponseCreateTaskDto";
 
 export class CreateTask implements IUseCase<IRequestCreateTaskDto, IResponseCreateTaskDto> {
    
@@ -23,14 +23,7 @@ export class CreateTask implements IUseCase<IRequestCreateTaskDto, IResponseCrea
         try {
             const persistedTask = await this.taskRepository.save(task);
 
-            return {
-                title: persistedTask.title,
-                description: persistedTask.description,
-                status: persistedTask.status,
-                userID: persistedTask.user,
-                createdAt: persistedTask.createdAt,
-                updatedAt: persistedTask.updatedAt
-            };
+            return {...persistedTask};
         }
         catch {
             throw new Error("Erro ao salvar Task");
