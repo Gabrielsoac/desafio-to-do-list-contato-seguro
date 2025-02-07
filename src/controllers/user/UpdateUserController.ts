@@ -5,12 +5,12 @@ import { TUserResponseDto } from "../../usecases/user/TUserResponseDto";
 import { TFindUserRequestDto } from "../../usecases/user/findOne/TFindUserRequest";
 import { UpdateUserById } from "../../usecases/user/update/UpdateUser";
 import { MongodbUserRepository } from "../../repository/user/MongodbUserRepository";
-import { TErrorResponseDto } from "../TErrorResponse";
+import { TErrorResponse } from "../TErrorResponse";
 import { StatusCodes } from "http-status-codes";
 
 export const UpdateUserController = async (
     req: Request<TFindUserRequestDto, {}, TCreateUserRequestDto>,
-    res: Response<TUserResponseDto | TErrorResponseDto>) => {
+    res: Response<TUserResponseDto | TErrorResponse>) => {
 
     const userRepository = new MongodbUserRepository;
     const UpdateUser = UpdateUserById.create(userRepository); 

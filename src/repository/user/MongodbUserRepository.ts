@@ -102,9 +102,16 @@ export class MongodbUserRepository implements IUserRepository {
     }
     
     public async deleteUser(id: string): Promise<void> {
+        
         try {
-            UserModel.findByIdAndDelete(id);
-        } 
+            await UserModel.findByIdAndDelete(id).then(
+                    user => {
+                        if(!user) {
+                            throw new Error("Usuário não encontrado");
+                        }
+                    }
+            );
+        }      
         catch(err){
             throw new Error((err as Error).message);
         }

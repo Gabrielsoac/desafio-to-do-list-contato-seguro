@@ -1,4 +1,4 @@
-export type TErrorResponseDto = {
+export type TErrorResponse = {
     code: number,
     message: string
 }

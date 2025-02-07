@@ -3,11 +3,11 @@ import { TUsersResponseDto } from "../../usecases/user/findAll/TUsersResponseDto
 import { FindAllUsers } from "../../usecases/user/findAll/FindAllUsers";
 import { MongodbUserRepository } from "../../repository/user/MongodbUserRepository";
 import { StatusCodes } from "http-status-codes";
-import { TErrorResponseDto } from "../TErrorResponse";
+import { TErrorResponse } from "../TErrorResponse";
 
 export const GetUsersController = async (
     req: Request<void>,
-    res: Response<TUsersResponseDto | TErrorResponseDto>) => {
+    res: Response<TUsersResponseDto | TErrorResponse>) => {
 
     const userRepository = new MongodbUserRepository;
     const FindUsers = FindAllUsers.create(userRepository); 

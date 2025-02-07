@@ -2,7 +2,7 @@ import { IUserRepository } from "../../../repository/user/IUserRepository";
 import { IUseCase } from "../../IUseCase";
 import { TDeleteUserRequestDto } from "./TDeleteUserRequestDto";
 
-export class DeleteUser implements IUseCase<TDeleteUserRequestDto, void> {
+export class DeleteUserById implements IUseCase<TDeleteUserRequestDto, void> {
 
     private userRepository: IUserRepository;
 
@@ -11,14 +11,14 @@ export class DeleteUser implements IUseCase<TDeleteUserRequestDto, void> {
     }
 
     public static create(userRepository: IUserRepository){
-        return new DeleteUser(userRepository);
+        return new DeleteUserById(userRepository);
     }
 
     async execute(input: TDeleteUserRequestDto): Promise<void> {
         try {
             await this.userRepository.deleteUser(input.id);
         } catch(err){
-            throw new Error(`Erro ao Deletar Usuário: ${(err as Error).message}`);
+            throw new Error((err as Error).message);
         }
     }
 }
