@@ -7,7 +7,8 @@ const server = express();
 
 server.use(express.json());
 server.use(routes);
-server.use(ResponseError);
 setupSwagger(server);
+
+server.use(ResponseError);
 
 export { server };

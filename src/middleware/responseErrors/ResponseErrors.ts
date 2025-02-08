@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { NextFunction, Request, Response } from "express";
 import { UserNotFoundError } from "../../errors/user/UserNotFoundError";
@@ -10,37 +9,43 @@ export const ResponseError = (
     err: any,
     req: Request,
     res: Response,
-    next: NextFunction
-) => {
+    next: NextFunction) => {
     
     if (res.headersSent) {
         return next(err);
     }
 
     if (err instanceof UserNotFoundError) {
-        return res.status(err.statusCode).json({
+        res.status(err.statusCode).json({
             statusCode: err.statusCode,
             message: err.message
-        });
+        }).end();
+
+        return;
     }
 
     if (err instanceof UserAlreadyExistsError) {
-        return res.status(err.statusCode).json({
+        res.status(err.statusCode).json({
             statusCode: err.statusCode,
             message: err.message
-        });
+        }).end();
+
+        return;
     }
 
     if (err instanceof TaskNotFoundError) {
-        return res.status(err.statusCode).json({
+        res.status(err.statusCode).json({
             statusCode: err.statusCode,
             message: err.message
-        });
+        }).end();
+
+        return;
     }
 
-    console.error(err); 
-    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
         statusCode: 500,
         message: "Internal Server Error"
-    });
+    }).end();
+
+    return;
 };

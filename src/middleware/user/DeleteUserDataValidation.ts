@@ -5,7 +5,7 @@ import { TFindUserRequestDto } from '../../usecases/user/findOne/TFindUserReques
 const paramsValidation: yup.ObjectSchema<TFindUserRequestDto> =
     yup.object().shape(
         {
-            id: yup.string().required(),
+            id: yup.string().required().max(24).min(24),
         }
     );
 

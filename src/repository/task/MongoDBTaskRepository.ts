@@ -13,7 +13,7 @@ export class MongoDBTaskRepository implements ITaskRepository {
     async save(task: Task): Promise<TPersistedTask> {
         
         try {
-            
+
             const taskPersisted = await TaskModel.create({
                 title: task.getTitle(),
                 description: task.getDescription(),
@@ -110,6 +110,34 @@ export class MongoDBTaskRepository implements ITaskRepository {
             );
         } catch(err){
             throw new TaskNotFoundError("Task não encontrada");
+        }
+    }
+
+    async findAllTasksByUser(userId: string): Promise<TPersistedAllTasks> {
+        
+
+        try {
+            const tasks = await TaskModel.find({user: userId});
+            const tasksDto = tasks.map(
+                task => (
+                    {
+                        id: task._id.toString(),
+                        title: task.title,
+                        description: task.description || "",
+                        status: task.status || TaskStatus.PENDING,
+                        userID: task.user._id.toString(),
+                        createdAt: task.createdAt || new Date(),
+                        updatedAt: task.updatedAt || new Date()
+                    }
+                )
+            )
+
+            return {
+                tasks: tasksDto
+            }
+        } 
+        catch(err){
+            throw new Error("Erro ao buscar Task do usuário");
         }
     }
 }

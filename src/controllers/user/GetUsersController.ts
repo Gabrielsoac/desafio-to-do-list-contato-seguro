@@ -5,7 +5,7 @@ import { MongodbUserRepository } from "../../repository/user/MongodbUserReposito
 import { StatusCodes } from "http-status-codes";
 
 export const GetUsersController = async (
-    req: Request<void>,
+    _: Request<void>,
     res: Response<TUsersResponseDto>,
     next: NextFunction) => {
 

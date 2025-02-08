@@ -37,5 +37,6 @@ routes.post('/task', CreateTaskDataValidation, CreateTaskController);
 routes.get('/task', FindAllTasksController);
 routes.delete('/task/:id', DeleteTaskDataValidation, DeleteTaskController);
 routes.put('/task/:id', UpdateTaskByIdDataValidation, UpdateTaskController);
+routes.get('/task/user/:id', FindUserByIdDataValidation, FindAllTasksController);
 
 export { routes }

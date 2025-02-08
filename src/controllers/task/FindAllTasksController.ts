@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { NextFunction, Request, Response } from "express";
 import { TAllTasksResponseDto } from "../../usecases/task/findAll/TAllTasksResponseDto";
 import { StatusCodes } from "http-status-codes";
@@ -9,7 +8,7 @@ const taskRepository = new MongoDBTaskRepository;
 const findAllTasks = FindAllTasks.create(taskRepository);
 
 export const FindAllTasksController = async (
-    req: Request,
+    _: Request,
     res: Response<TAllTasksResponseDto>,
     next: NextFunction) => {
 
