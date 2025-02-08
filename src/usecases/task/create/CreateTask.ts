@@ -2,9 +2,9 @@ import { Task } from "../../../domain/entities/task/Task";
 import { ITaskRepository } from "../../../repository/task/ITaskRepository";
 import { IUseCase } from "../../IUseCase";
 import { TRequestCreateTaskDto } from "./TRequestCreateTaskDto";
-import { TResponseCreateTaskDto } from "./TResponseCreateTaskDto";
+import { TResponseTaskDto } from "../TTaskResponseDto";
 
-export class CreateTask implements IUseCase<TRequestCreateTaskDto, TResponseCreateTaskDto> {
+export class CreateTask implements IUseCase<TRequestCreateTaskDto, TResponseTaskDto> {
    
     private taskRepository: ITaskRepository;
 
@@ -16,7 +16,7 @@ export class CreateTask implements IUseCase<TRequestCreateTaskDto, TResponseCrea
         return new CreateTask(taskRepository);
     }
 
-    public async execute(input: TRequestCreateTaskDto): Promise<TResponseCreateTaskDto> {
+    public async execute(input: TRequestCreateTaskDto): Promise<TResponseTaskDto> {
         
         const task = Task.create(input.title, input.description || "", input.user);
 

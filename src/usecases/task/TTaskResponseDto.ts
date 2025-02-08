@@ -1,6 +1,6 @@
-import { TaskStatus } from "../../../domain/entities/task/EnumTaskStatus";
+import { TaskStatus } from "../../domain/entities/task/EnumTaskStatus";
 
-export type TResponseCreateTaskDto = {
+export type TTaskResponseDto = {
     title: string,
     description: string,
     status: TaskStatus,

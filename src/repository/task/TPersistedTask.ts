@@ -1,6 +1,6 @@
 import { TaskStatus } from "../../domain/entities/task/EnumTaskStatus";
 
-export type TTaskPersistedProps = {
+export type TPersistedTask = {
     id: string,
     title: string,
     description: string,
