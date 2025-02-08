@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { TaskStatus } from "../../domain/entities/task/EnumTaskStatus";
 import { Task } from "../../domain/entities/task/Task";
 import { TaskModel } from "../../models/TaskModel";
