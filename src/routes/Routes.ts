@@ -10,6 +10,10 @@ import { DeleteUserController } from '../controllers/user/DeleteUserController';
 import { FindAllTasksController } from '../controllers/task/FindAllTasksController';
 import { UpdateTaskController } from '../controllers/task/UpdateTaskController';
 import { DeleteTaskController } from '../controllers/task/DeleteTaskController';
+import { CreateUserDataValidation } from '../middleware/user/CreateUserDataValidation';
+import { FindUserByIdDataValidation } from '../middleware/user/FindUserByIdDataValidation';
+import { UpdateUserByIdDataValidation } from '../middleware/user/UpdateUserDataValidation';
+import { DeleteUserByIdDataValidation } from '../middleware/user/DeleteUserDataValidation';
 
 const routes = Router();
 
@@ -19,11 +23,11 @@ routes.get(
     healthCheck
 );
 
-routes.post('/user', CreateUserController);
-routes.get('/user/:id', GetUserByIdController);
+routes.post('/user', CreateUserDataValidation, CreateUserController);
+routes.get('/user/:id', FindUserByIdDataValidation, GetUserByIdController);
 routes.get('/user', GetUsersController);
-routes.put('/user/:id', UpdateUserController);
-routes.delete('/user/:id', DeleteUserController);
+routes.put('/user/:id', UpdateUserByIdDataValidation, UpdateUserController);
+routes.delete('/user/:id', DeleteUserByIdDataValidation, DeleteUserController);
 
 
 routes.post('/task', CreateTaskController);
