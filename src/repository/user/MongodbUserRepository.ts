@@ -105,11 +105,11 @@ export class MongodbUserRepository implements IUserRepository {
         
         try {
             await UserModel.findByIdAndDelete(id).then(
-                    user => {
-                        if(!user) {
-                            throw new Error("Usuário não encontrado");
-                        }
+                user => {
+                    if(!user) {
+                        throw new Error("Usuário não encontrado");
                     }
+                }
             );
         }      
         catch(err){
