@@ -10,7 +10,6 @@ import { TaskStatus } from "../../domain/entities/task/EnumTaskStatus";
 
 export type TRequestUpdateTaskDto = {
 
-    id: string,
     title: string,
     description?: string,
     status: TaskStatus

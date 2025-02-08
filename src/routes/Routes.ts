@@ -14,6 +14,9 @@ import { CreateUserDataValidation } from '../middleware/user/CreateUserDataValid
 import { FindUserByIdDataValidation } from '../middleware/user/FindUserByIdDataValidation';
 import { UpdateUserByIdDataValidation } from '../middleware/user/UpdateUserDataValidation';
 import { DeleteUserByIdDataValidation } from '../middleware/user/DeleteUserDataValidation';
+import { CreateTaskDataValidation } from '../middleware/task/CreateTaskDataValidation';
+import { DeleteTaskDataValidation } from '../middleware/task/DeleteTaskDataValidation';
+import { UpdateTaskByIdDataValidation } from '../middleware/task/UpdateTaskDataValidation';
 
 const routes = Router();
 
@@ -30,9 +33,9 @@ routes.put('/user/:id', UpdateUserByIdDataValidation, UpdateUserController);
 routes.delete('/user/:id', DeleteUserByIdDataValidation, DeleteUserController);
 
 
-routes.post('/task', CreateTaskController);
+routes.post('/task', CreateTaskDataValidation, CreateTaskController);
 routes.get('/task', FindAllTasksController);
-routes.delete('/task/:id', DeleteTaskController);
-routes.put('/task/:id', UpdateTaskController);
+routes.delete('/task/:id', DeleteTaskDataValidation, DeleteTaskController);
+routes.put('/task/:id', UpdateTaskByIdDataValidation, UpdateTaskController);
 
 export { routes }
