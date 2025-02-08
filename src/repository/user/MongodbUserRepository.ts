@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { User } from "../../domain/entities/user/User";
+import { UserAlreadyExistsError } from "../../errors/user/UserAlreadyExistsError";
 import { UserNotFoundError } from "../../errors/user/UserNotFoundError";
 import { UserModel } from "../../models/UserModel";
 import { TUpdateUserRequestDto } from "../../usecases/user/update/TUpdateUserRequestDto";
@@ -11,6 +12,13 @@ export class MongodbUserRepository implements IUserRepository {
     public async createUser(user: User): Promise<TPersistedUser> {
         
         try {
+
+            const validation = await UserModel.findOne({ email: user.getEmail()});
+
+            if(validation){
+                throw new UserAlreadyExistsError("Usuário com este email já existe");
+            }
+
             const userPersisted = await UserModel.create(
                 {
                 name: user.getName(),
@@ -24,8 +32,9 @@ export class MongodbUserRepository implements IUserRepository {
                 name: userPersisted.name,
                 email: userPersisted.email
             };
+
         } catch(err) {
-            throw new Error(`Erro ao salvar usuário: ${(err as Error).message}`);
+            throw new UserAlreadyExistsError((err as UserAlreadyExistsError).message);
         }
     }
     
@@ -64,44 +73,54 @@ export class MongodbUserRepository implements IUserRepository {
 
             return usersDto;
         } catch(err) {
-            throw new Error((err as Error).message);
+            throw new Error("Erro ao buscar todos os usuários");
         }
     }
     
     public async updateUser(userUpdateData: TUpdateUserRequestDto): Promise<TPersistedUser> {
-        
         try {
-            const user = await UserModel.findByIdAndUpdate(
-                {
-                    _id: userUpdateData.id,
-                },
+            
+            const user = await UserModel.findById(userUpdateData.id);
+            if (!user) {
+                throw new UserNotFoundError("Usuário não encontrado");
+            }
+    
+            
+            const existingUser = await UserModel.findOne({ email: userUpdateData.email });
+            if (existingUser && existingUser._id.toString() !== userUpdateData.id) {
+                throw new UserAlreadyExistsError("Usuário com este email já existe");
+            }
+            
+            const userUpdated = await UserModel.findByIdAndUpdate(
+                userUpdateData.id,
                 {
                     name: userUpdateData.name,
                     email: userUpdateData.email,
                     password: userUpdateData.password
-
                 },
-                {
-                    new: true,
-                    runValidators: true
-                }
+                { new: true, runValidators: true }
             );
-
-            if(!user) {
-                throw new Error("Erro ao atualizar usuário");
+    
+            if (!userUpdated) {
+                throw new UserNotFoundError("Erro ao atualizar usuário");
             }
-
+    
             return {
-                id: user._id.toString(),
-                name: user.name,
-                email: user.email,
+                id: userUpdated._id.toString(),
+                name: userUpdated.name,
+                email: userUpdated.email,
+            };
+        } catch (err) {
+            if (err instanceof UserNotFoundError) {
+                throw new UserNotFoundError("Usuário não encontrado");
+            } else if (err instanceof UserAlreadyExistsError) {
+                throw new UserAlreadyExistsError("Usuário já existe");
+            } else {
+                throw new Error("Erro inesperado ao tentar atualizar o usuário");
             }
-        }
-
-        catch(err){
-            throw new Error((err as Error).message);
         }
     }
+    
     
     public async deleteUser(id: string): Promise<void> {
         
@@ -109,13 +128,13 @@ export class MongodbUserRepository implements IUserRepository {
             await UserModel.findByIdAndDelete(id).then(
                 user => {
                     if(!user) {
-                        throw new Error("Usuário não encontrado");
+                        throw new UserNotFoundError("Usuário não encontrado");
                     }
                 }
             );
         }      
-        catch(err){
-            throw new Error((err as Error).message);
+        catch(err) {
+            throw new UserNotFoundError("Usuário não encontrado");
         }
     }
 }

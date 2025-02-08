@@ -18,15 +18,15 @@ export class CreateTask implements IUseCase<TRequestCreateTaskDto, TTaskResponse
 
     public async execute(input: TRequestCreateTaskDto): Promise<TTaskResponseDto> {
         
-        const task = Task.create(input.title, input.description || "", input.user);
+        const task = Task.create(input.title, input.description , input.user);
 
         try {
             const persistedTask = await this.taskRepository.save(task);
 
             return {...persistedTask};
         }
-        catch {
-            throw new Error("Erro ao salvar Task");
+        catch(err) {
+            throw new Error((err as Error).message);
         }
     }
 }

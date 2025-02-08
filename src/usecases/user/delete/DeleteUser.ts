@@ -1,3 +1,4 @@
+import { UserNotFoundError } from "../../../errors/user/UserNotFoundError";
 import { IUserRepository } from "../../../repository/user/IUserRepository";
 import { IUseCase } from "../../IUseCase";
 import { TDeleteUserRequestDto } from "./TDeleteUserRequestDto";
@@ -18,7 +19,7 @@ export class DeleteUserById implements IUseCase<TDeleteUserRequestDto, void> {
         try {
             await this.userRepository.deleteUser(input.id);
         } catch(err){
-            throw new Error((err as Error).message);
+            throw new UserNotFoundError((err as UserNotFoundError).message);
         }
     }
 }

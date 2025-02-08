@@ -1,5 +1,7 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { TaskStatus } from "../../domain/entities/task/EnumTaskStatus";
 import { Task } from "../../domain/entities/task/Task";
+import { TaskNotFoundError } from "../../errors/task/TaskNotFoundException";
 import { TaskModel } from "../../models/TaskModel";
 import { ITaskRepository } from "./ITaskRepository";
 import { TPersistedAllTasks } from "./TPersistedAllTasks";
@@ -11,12 +13,12 @@ export class MongoDBTaskRepository implements ITaskRepository {
     async save(task: Task): Promise<TPersistedTask> {
         
         try {
+            
             const taskPersisted = await TaskModel.create({
                 title: task.getTitle(),
                 description: task.getDescription(),
                 status: TaskStatus.PENDING,
                 user: task.getUser()
-
             });
             
             return {
@@ -31,7 +33,7 @@ export class MongoDBTaskRepository implements ITaskRepository {
         } 
         
         catch(err){
-            throw new Error((err as Error).message);
+            throw new Error("Erro ao salvar usuário");
         }
     }
     
@@ -56,7 +58,7 @@ export class MongoDBTaskRepository implements ITaskRepository {
             return {tasks: tasksDto};
         }   
         catch(err){
-            throw new Error((err as Error).message);
+            throw new Error("Erro ao buscar todos os usuários");
         }
     }
     
@@ -92,7 +94,7 @@ export class MongoDBTaskRepository implements ITaskRepository {
                 updatedAt: taskUpdated.updatedAt || new Date()
             } 
         } catch(err){
-            throw new Error((err as Error).message);
+            throw new TaskNotFoundError("Task não encontrada");
         }
     }
     
@@ -102,13 +104,12 @@ export class MongoDBTaskRepository implements ITaskRepository {
             await TaskModel.findByIdAndDelete(id).then(
                 task => {
                     if(!task){
-                        throw new Error("Task não encontrada");
+                        throw new TaskNotFoundError("Task não encontrada");
                     }
                 }
             );
         } catch(err){
-            throw new Error((err as Error).message);
+            throw new TaskNotFoundError("Task não encontrada");
         }
-        
     }
 }

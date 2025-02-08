@@ -3,6 +3,7 @@ import { IUserRepository } from "../../../repository/user/IUserRepository";
 import { IUseCase } from "../../IUseCase";
 import { TCreateUserRequestDto } from "./TCreateUserRequestDto";
 import { TUserResponseDto } from "../TUserResponseDto";
+import { UserAlreadyExistsError } from "../../../errors/user/UserAlreadyExistsError";
 
 export class CreateUser implements IUseCase<TCreateUserRequestDto, TUserResponseDto> {
     
@@ -25,7 +26,7 @@ export class CreateUser implements IUseCase<TCreateUserRequestDto, TUserResponse
             return {...persistedUser}
             
         } catch(err){
-            throw new Error(`Erro ao criar usuário: ${(err as Error).message}`);
+            throw new UserAlreadyExistsError((err as UserAlreadyExistsError).message);
         }
     }
 }

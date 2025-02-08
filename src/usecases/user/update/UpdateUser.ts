@@ -1,3 +1,4 @@
+import { UserAlreadyExistsError } from "../../../errors/user/UserAlreadyExistsError";
 import { IUserRepository } from "../../../repository/user/IUserRepository";
 import { IUseCase } from "../../IUseCase";
 import { TUserResponseDto } from "../TUserResponseDto";
@@ -23,7 +24,7 @@ export class UpdateUserById implements IUseCase<TUpdateUserRequestDto, TUserResp
             return updatedUser;
         }
         catch(err){
-            throw new Error(`Erro ao atualizar dados: ${(err as Error).message}`);
+            throw new UserAlreadyExistsError((err as UserAlreadyExistsError).message);
         }
     }
 }

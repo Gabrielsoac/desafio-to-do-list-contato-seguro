@@ -1,3 +1,4 @@
+import { TaskNotFoundError } from "../../../errors/task/TaskNotFoundException";
 import { ITaskRepository } from "../../../repository/task/ITaskRepository";
 import { IUseCase } from "../../IUseCase";
 import { TTaskResponseDto } from "../TTaskResponseDto";
@@ -32,7 +33,7 @@ export class UpdateTaskById implements IUseCase<TTaskUpdateRequestDto, TTaskResp
             }
         }
         catch(err){
-            throw new Error((err as Error).message);
+            throw new TaskNotFoundError((err as TaskNotFoundError).message);
         }
 
     }
