@@ -7,6 +7,9 @@ import { GetUserByIdController } from '../controllers/user/GetUserByIdController
 import { GetUsersController } from '../controllers/user/GetUsersController';
 import { UpdateUserController } from '../controllers/user/UpdateUserController';
 import { DeleteUserController } from '../controllers/user/DeleteUserController';
+import { FindAllTasksController } from '../controllers/task/FindAllTasksController';
+import { UpdateTaskController } from '../controllers/task/UpdateTaskController';
+import { DeleteTaskController } from '../controllers/task/DeleteTaskController';
 
 const routes = Router();
 
@@ -19,8 +22,13 @@ routes.get(
 routes.post('/user', CreateUserController);
 routes.get('/user/:id', GetUserByIdController);
 routes.get('/user', GetUsersController);
-routes.put('/user/:id', UpdateUserController)
-routes.delete('/user/:id', DeleteUserController)
+routes.put('/user/:id', UpdateUserController);
+routes.delete('/user/:id', DeleteUserController);
+
+
 routes.post('/task', CreateTaskController);
+routes.get('/task', FindAllTasksController);
+routes.delete('/task/:id', DeleteTaskController);
+routes.put('/task/:id', UpdateTaskController);
 
 export { routes }
