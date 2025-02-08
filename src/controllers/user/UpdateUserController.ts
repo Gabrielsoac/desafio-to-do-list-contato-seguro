@@ -1,16 +1,16 @@
 /* eslint-disable @typescript-eslint/no-empty-object-type */
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import { TCreateUserRequestDto } from "../../usecases/user/create/TCreateUserRequestDto";
 import { TUserResponseDto } from "../../usecases/user/TUserResponseDto";
 import { TFindUserRequestDto } from "../../usecases/user/findOne/TFindUserRequest";
 import { UpdateUserById } from "../../usecases/user/update/UpdateUser";
 import { MongodbUserRepository } from "../../repository/user/MongodbUserRepository";
-import { TErrorResponse } from "../TErrorResponse";
 import { StatusCodes } from "http-status-codes";
 
 export const UpdateUserController = async (
     req: Request<TFindUserRequestDto, {}, TCreateUserRequestDto>,
-    res: Response<TUserResponseDto | TErrorResponse>) => {
+    res: Response<TUserResponseDto>,
+    next: NextFunction) => {
 
     const userRepository = new MongodbUserRepository;
     const UpdateUser = UpdateUserById.create(userRepository); 
@@ -27,12 +27,7 @@ export const UpdateUserController = async (
 
         res.status(StatusCodes.OK).json(updatedUser);
     } 
-    catch(err) {
-        res.status(StatusCodes.BAD_REQUEST).json(
-            {
-                code: StatusCodes.BAD_REQUEST,
-                message: (err as Error).message
-            }
-        );
+    catch(err){
+        next(err);
     }
 }

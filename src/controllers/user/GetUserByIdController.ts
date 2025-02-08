@@ -5,14 +5,13 @@ import { FindUserById } from "../../usecases/user/findOne/FindUserById";
 import { TFindUserRequestDto } from "../../usecases/user/findOne/TFindUserRequest";
 import { StatusCodes } from "http-status-codes";
 import { TUserResponseDto } from "../../usecases/user/TUserResponseDto";
-import { TErrorResponse } from "../TErrorResponse";
 
 const userRepository = new MongodbUserRepository;
 const findUserById = FindUserById.create(userRepository);
 
 export const GetUserByIdController = async (
     req: Request<TFindUserRequestDto, {}, {}>,
-    res: Response<TUserResponseDto | TErrorResponse>,
+    res: Response<TUserResponseDto>,
     next: NextFunction) => {
 
     try {

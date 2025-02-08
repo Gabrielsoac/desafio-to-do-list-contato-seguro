@@ -1,6 +1,6 @@
 import { StatusCodes } from "http-status-codes";
 
-export class UserNotFoundError extends Error {
+export class TaskNotFoundError extends Error {
     
     public statusCode: number;
     public name: string

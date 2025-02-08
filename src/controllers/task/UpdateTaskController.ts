@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-empty-object-type */
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import { TTaskResponseDto } from "../../usecases/task/TTaskResponseDto";
-import { TErrorResponse } from "../TErrorResponse";
 import { TFindTaskById } from "../../usecases/task/delete/TFindTaskById";
 import { StatusCodes } from "http-status-codes";
 import { MongoDBTaskRepository } from "../../repository/task/MongoDBTaskRepository";
@@ -21,7 +20,8 @@ const updateTask = UpdateTaskById.create(taskRepository);
 
 export const UpdateTaskController = async (
     req: Request<TFindTaskById, {}, TRequestUpdateTaskDto>,
-    res: Response<TTaskResponseDto | TErrorResponse>) => {
+    res: Response<TTaskResponseDto>,
+    next: NextFunction) => {
 
     try {
 
@@ -40,13 +40,8 @@ export const UpdateTaskController = async (
             }
         );
 
-    } catch(err){ 
-        res.status(StatusCodes.BAD_REQUEST).json(
-            {
-                code: StatusCodes.BAD_REQUEST,
-                message: (err as Error).message
-            }
-        )
+    }     
+    catch(err){
+        next(err);
     }
-
 } 
