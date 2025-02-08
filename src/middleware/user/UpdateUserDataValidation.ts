@@ -21,7 +21,7 @@ const bodyValidation: yup.ObjectSchema<TCreateUserRequestDto> =
 const paramsValidation: yup.ObjectSchema<TFindUserRequestDto> =
     yup.object().shape(
         {
-            id: yup.string().required(),
+            id: yup.string().required().min(24).max(24),
         }
     );
 
