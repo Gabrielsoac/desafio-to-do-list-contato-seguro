@@ -1,4 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { User } from "../../domain/entities/user/User";
+import { UserNotFoundError } from "../../errors/user/UserNotFoundError";
 import { UserModel } from "../../models/UserModel";
 import { TUpdateUserRequestDto } from "../../usecases/user/update/TUpdateUserRequestDto";
 import { IUserRepository } from "./IUserRepository";
@@ -33,7 +35,7 @@ export class MongodbUserRepository implements IUserRepository {
             const user = await UserModel.findById(id);
 
             if(!user) {
-                throw new Error(`Usuário com o id: ${id} não encontrado!`);
+                throw new UserNotFoundError(`Usuário com o id: ${id} não encontrado!`);
             } else {
                 return {
                     id: user._id.toString(),
@@ -43,7 +45,7 @@ export class MongodbUserRepository implements IUserRepository {
             }
         } 
         catch (err) {
-            throw new Error(`Usuário não encontrado: ${(err as Error).message}`);
+            throw new UserNotFoundError("Usuário não encontrado");
         }
     }
 

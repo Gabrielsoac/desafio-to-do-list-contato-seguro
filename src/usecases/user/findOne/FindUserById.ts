@@ -1,3 +1,4 @@
+import { UserNotFoundError } from "../../../errors/user/UserNotFoundError";
 import { IUserRepository } from "../../../repository/user/IUserRepository";
 import { IUseCase } from "../../IUseCase";
 import { TUserResponseDto } from "../TUserResponseDto";
@@ -15,13 +16,13 @@ export class FindUserById implements IUseCase<TFindUserRequestDto, TUserResponse
         return new FindUserById(userRepository);
     }
 
-    execute(input: TFindUserRequestDto): Promise<TUserResponseDto> {
+    async execute(input: TFindUserRequestDto): Promise<TUserResponseDto> {
         try {
-            const user = this.userRepository.findById(input.id);
+            const user = await this.userRepository.findById(input.id);
             return user;
 
         } catch (err) {
-            throw new Error(`Erro ao buscar usuário: ${(err as Error).message}`);
+            throw new UserNotFoundError((err as UserNotFoundError).message);
         }
     }
 }
