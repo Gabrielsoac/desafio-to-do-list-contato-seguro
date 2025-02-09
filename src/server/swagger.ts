@@ -8,7 +8,7 @@ const swaggerOptions = {
     info: {
       title: 'Documentação API Tasks - Contato Seguro',
       version: '1.0.0',
-      description: 'DOCUMENTAÇÃO CRIADA COM SWAGGER PARA API DE TASK PARA VAGA DA CONTATO SEGURO ',
+      description: 'DOCUMENTAÇÃO CRIADA COM SWAGGER PARA API DE TASK PARA VAGA DA CONTATO SEGURO',
     },
   },
   apis: ['./src/**/*.ts'],
