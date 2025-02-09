@@ -483,68 +483,450 @@
     },
     "/user": {
       "post": {
-        "description": "",
+        "summary": "Criação de Usuário",
+        "description": "Endpoint para criar um novo usuário.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "name",
+                "email",
+                "password"
+              ],
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "description": "O nome completo do usuário.",
+                  "example": "FULANO DE TAL"
+                },
+                "email": {
+                  "type": "string",
+                  "format": "email",
+                  "description": "O endereço de email do usuário.",
+                  "example": "fuladodetal@gmail.com"
+                },
+                "password": {
+                  "type": "string",
+                  "description": "A senha do usuário. Precisa ter pelo menos 8 dígitos, 1 caractere especial, 1 letra maiúscula e 1 letra minúscula.",
+                  "minLength": 8,
+                  "pattern": "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[^a-zA-Z0-9]).{8,}$",
+                  "example": "Sa192921@"
+                }
+              }
+            }
+          }
+        ],
         "responses": {
-          "default": {
-            "description": ""
+          "201": {
+            "description": "Usuário criado com sucesso",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "example": "67a8faa79f0e98997b542dc2"
+                },
+                "name": {
+                  "type": "string",
+                  "example": "FULANO DE TAL"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "fuladodetal@gmail.com"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            },
+            "headers": {
+              "location": {
+                "description": "URL do novo recurso criado",
+                "schema": {
+                  "type": "string",
+                  "example": "/user/67a8faa79f0e98997b542dc2"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Usuário com este email já existe",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "number",
+                  "example": 400
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Usuário com este email já existe"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "500": {
+            "description": "Erro interno no servidor",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "number",
+                  "example": 500
+                },
+                "message": {
+                  "type": "string",
+                  "example": "INTERNAL SERVER ERROR"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
           }
         }
       },
       "get": {
-        "description": "",
+        "summary": "Listagem de Usuários",
+        "description": "Endpoint para listar todos os usuários cadastrados.",
+        "produces": [
+          "application/json"
+        ],
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "description": "Usuários listados com sucesso",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "example": "67a91072118489d5e95ef2d7"
+                  },
+                  "name": {
+                    "type": "string",
+                    "example": "Fulano da Silva"
+                  },
+                  "email": {
+                    "type": "string",
+                    "example": "fulanodasilva@gmail.com"
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "500": {
+            "description": "Erro interno no servidor",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "number",
+                  "example": 500
+                },
+                "message": {
+                  "type": "string",
+                  "example": "INTERNAL SERVER ERROR"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
           }
         }
       }
     },
     "/user/{id}": {
       "get": {
-        "description": "",
+        "summary": "Obter Usuário",
+        "description": "Endpoint para obter detalhes de um usuário específico pelo ID.",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 24,
+            "maxLength": 24,
+            "description": "O ID do usuário cujos detalhes serão obtidos."
           }
         ],
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "description": "Detalhes do usuário obtidos com sucesso",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "example": "67a8faa79f0e98997b542dc2"
+                },
+                "name": {
+                  "type": "string",
+                  "example": "FULANO DE TAL"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "fuladodetal@gmail.com"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "404": {
+            "description": "Usuário não encontrado",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "number",
+                  "example": 404
+                },
+                "message": {
+                  "type": "string",
+                  "example": "usuário não encontrado"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
           }
         }
       },
       "put": {
-        "description": "",
+        "summary": "Atualização de Usuário",
+        "description": "Endpoint para atualizar um usuário específico pelo ID.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 24,
+            "maxLength": 24,
+            "description": "O ID do usuário a ser atualizado."
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "name",
+                "email",
+                "password"
+              ],
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "description": "O nome completo do usuário.",
+                  "example": "Fulano da Silva"
+                },
+                "email": {
+                  "type": "string",
+                  "format": "email",
+                  "description": "O endereço de email do usuário.",
+                  "example": "fulanoxyz@gmail.com"
+                },
+                "password": {
+                  "type": "string",
+                  "description": "A senha do usuário. Precisa ter pelo menos 8 dígitos, 1 caractere especial, 1 letra maiúscula e 1 letra minúscula.",
+                  "minLength": 8,
+                  "pattern": "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[^a-zA-Z0-9]).{8,}$",
+                  "example": "G12345653fsa@"
+                }
+              }
+            }
           }
         ],
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "description": "Usuário atualizado com sucesso",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "example": "67a91072118489d5e95ef2d7"
+                },
+                "name": {
+                  "type": "string",
+                  "example": "Fulano da Silva"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "fulanoxyz@gmail.com"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "Usuário com este email já existe",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "number",
+                  "example": 400
+                },
+                "message": {
+                  "type": "string",
+                  "example": "usuário com este email já existe"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "404": {
+            "description": "Usuário não encontrado",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "number",
+                  "example": 404
+                },
+                "message": {
+                  "type": "string",
+                  "example": "usuário não encontrado"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "500": {
+            "description": "Erro interno no servidor",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "number",
+                  "example": 500
+                },
+                "message": {
+                  "type": "string",
+                  "example": "INTERNAL SERVER ERROR"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
           }
         }
       },
       "delete": {
-        "description": "",
+        "summary": "Exclusão de Usuário",
+        "description": "Endpoint para excluir um usuário específico pelo ID.",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 24,
+            "maxLength": 24,
+            "description": "O ID do usuário a ser excluído."
           }
         ],
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "description": "Usuário excluído com sucesso",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "number",
+                  "example": 200
+                },
+                "message": {
+                  "type": "string",
+                  "example": "No Content"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "404": {
+            "description": "Usuário não encontrado",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "number",
+                  "example": 404
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Usuário não encontrado"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "500": {
+            "description": "Erro interno no servidor",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "number",
+                  "example": 500
+                },
+                "message": {
+                  "type": "string",
+                  "example": "INTERNAL SERVER ERROR"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
           }
         }
       }
