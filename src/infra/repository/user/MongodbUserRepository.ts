@@ -87,14 +87,17 @@ export class MongodbUserRepository implements IUserRepository {
                     email: userUpdateData.email,
                     password: userUpdateData.password
                 },
-                { new: true, runValidators: true }
+                { 
+                    new: true,
+                    runValidators: true
+                }
             );
     
             if (!userUpdated) {
                 throw new UserNotFoundError("Erro ao atualizar usuário");
             }
     
-            return CreateOutputPersistedUser.create(user);
+            return CreateOutputPersistedUser.create(userUpdated);
 
         } catch (err) {
             if (err instanceof UserNotFoundError) {
