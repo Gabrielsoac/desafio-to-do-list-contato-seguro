@@ -1,9 +1,9 @@
 import { TaskNotFoundError } from "../../../../errors/task/TaskNotFoundException";
 import { ITaskRepository } from "../../../../infra/repository/task/ITaskRepository";
 import { IUseCase } from "../../IUseCase";
-import { TFindTaskById } from "./TFindTaskById";
+import { TGetTaskByIdRequestDto } from "../../../../controllers/task/taskDtos/request/TGetTaskByIdRequestDto";
 
-export class DeleteTaskById implements IUseCase<TFindTaskById, void> {
+export class DeleteTaskById implements IUseCase<TGetTaskByIdRequestDto, void> {
 
     private taskRepository: ITaskRepository;
 
@@ -15,7 +15,7 @@ export class DeleteTaskById implements IUseCase<TFindTaskById, void> {
         return new DeleteTaskById(taskRepository);
     }
 
-    async execute(input: TFindTaskById): Promise<void> {
+    async execute(input: TGetTaskByIdRequestDto): Promise<void> {
         try {
             await this.taskRepository.deleteTask(input.id);
         } catch(err){

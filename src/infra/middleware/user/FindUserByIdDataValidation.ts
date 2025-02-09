@@ -1,6 +1,6 @@
 import * as yup from 'yup'
 import { validation } from '../Validation';
-import { TFindUserRequestDto } from '../../../domain/usecases/user/findOne/TFindUserRequest';
+import { TFindUserRequestDto } from '../../../controllers/user/userDtos/request/TFindUserRequest';
 
 const paramsValidation: yup.ObjectSchema<TFindUserRequestDto> =
     yup.object().shape(

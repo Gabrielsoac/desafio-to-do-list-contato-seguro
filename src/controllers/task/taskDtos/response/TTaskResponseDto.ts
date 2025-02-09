@@ -1,4 +1,4 @@
-import { TaskStatus } from "../../entities/task/EnumTaskStatus";
+import { TaskStatus } from "../../../../domain/entities/task/EnumTaskStatus";
 
 export type TTaskResponseDto = {
     id: string,

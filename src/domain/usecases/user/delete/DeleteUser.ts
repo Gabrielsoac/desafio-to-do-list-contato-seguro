@@ -2,7 +2,7 @@ import { UserNotFoundError } from "../../../../errors/user/UserNotFoundError";
 import { ITaskRepository } from "../../../../infra/repository/task/ITaskRepository";
 import { IUserRepository } from "../../../../infra/repository/user/IUserRepository";
 import { IUseCase } from "../../IUseCase";
-import { TDeleteUserRequestDto } from "./TDeleteUserRequestDto";
+import { TDeleteUserRequestDto } from "../../../../controllers/user/userDtos/request/TDeleteUserRequestDto";
 
 export class DeleteUserById implements IUseCase<TDeleteUserRequestDto, void> {
 

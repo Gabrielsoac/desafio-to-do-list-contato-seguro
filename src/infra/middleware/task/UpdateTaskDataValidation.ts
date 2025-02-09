@@ -1,7 +1,7 @@
 import * as yup from 'yup'
 import { validation } from '../Validation';
 import { TRequestUpdateTaskDto } from '../../../controllers/task/UpdateTaskController';
-import { TFindTaskById } from '../../../domain/usecases/task/delete/TFindTaskById';
+import { TGetTaskByIdRequestDto } from '../../../controllers/task/taskDtos/request/TGetTaskByIdRequestDto';
 import { TaskStatus } from '../../../domain/entities/task/EnumTaskStatus';
 
 const bodyValidation: yup.ObjectSchema<TRequestUpdateTaskDto> =
@@ -13,7 +13,7 @@ const bodyValidation: yup.ObjectSchema<TRequestUpdateTaskDto> =
         }
     );
 
-const paramsValidation: yup.ObjectSchema<TFindTaskById> =
+const paramsValidation: yup.ObjectSchema<TGetTaskByIdRequestDto> =
     yup.object().shape(
         {
             id: yup.string().required(),

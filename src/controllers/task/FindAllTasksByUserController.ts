@@ -1,8 +1,8 @@
 import { NextFunction, Request, Response } from "express";
-import { TAllTasksResponseDto } from "../../domain/usecases/task/findAll/TAllTasksResponseDto";
+import { TAllTasksResponseDto } from "./taskDtos/response/TAllTasksResponseDto";
 import { StatusCodes } from "http-status-codes";
 import { MongoDBTaskRepository } from "../../infra/repository/task/MongoDBTaskRepository";
-import { TFindUserRequestDto } from "../../domain/usecases/user/findOne/TFindUserRequest";
+import { TFindUserRequestDto } from "../user/userDtos/request/TFindUserRequest";
 import { FindAllTasksByUser } from "../../domain/usecases/task/findAllTasksByUser/FindAllTasksByUser";
 import { MongodbUserRepository } from "../../infra/repository/user/MongodbUserRepository";
 

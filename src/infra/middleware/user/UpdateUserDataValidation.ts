@@ -1,7 +1,7 @@
 import * as yup from 'yup'
 import { validation } from '../Validation';
-import { TCreateUserRequestDto } from '../../../domain/usecases/user/create/TCreateUserRequestDto';
-import { TFindUserRequestDto } from '../../../domain/usecases/user/findOne/TFindUserRequest';
+import { TCreateUserRequestDto } from '../../../controllers/user/userDtos/request/TCreateUserRequestDto';
+import { TFindUserRequestDto } from '../../../controllers/user/userDtos/request/TFindUserRequest';
 
 const bodyValidation: yup.ObjectSchema<TCreateUserRequestDto> =
     yup.object().shape(

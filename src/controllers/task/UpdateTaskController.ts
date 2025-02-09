@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-empty-object-type */
 import { NextFunction, Request, Response } from "express";
-import { TTaskResponseDto } from "../../domain/usecases/task/TTaskResponseDto";
-import { TFindTaskById } from "../../domain/usecases/task/delete/TFindTaskById";
+import { TTaskResponseDto } from "./taskDtos/response/TTaskResponseDto";
+import { TGetTaskByIdRequestDto } from "./taskDtos/request/TGetTaskByIdRequestDto";
 import { StatusCodes } from "http-status-codes";
 import { MongoDBTaskRepository } from "../../infra/repository/task/MongoDBTaskRepository";
 import { UpdateTaskById } from "../../domain/usecases/task/update/UpdateTaskById";
@@ -19,7 +19,7 @@ const taskRepository = new MongoDBTaskRepository;
 const updateTask = UpdateTaskById.create(taskRepository);
 
 export const UpdateTaskController = async (
-    req: Request<TFindTaskById, {}, TRequestUpdateTaskDto>,
+    req: Request<TGetTaskByIdRequestDto, {}, TRequestUpdateTaskDto>,
     res: Response<TTaskResponseDto>,
     next: NextFunction) => {
 

@@ -1,6 +1,6 @@
 import { ITaskRepository } from "../../../../infra/repository/task/ITaskRepository";
 import { IUseCase } from "../../IUseCase";
-import { TAllTasksResponseDto } from "./TAllTasksResponseDto";
+import { TAllTasksResponseDto } from "../../../../controllers/task/taskDtos/response/TAllTasksResponseDto";
 
 export class FindAllTasks implements IUseCase<void, TAllTasksResponseDto> {
 

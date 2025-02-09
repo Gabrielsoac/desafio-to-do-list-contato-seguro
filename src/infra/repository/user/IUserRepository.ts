@@ -1,5 +1,5 @@
 import { User } from "../../../domain/entities/user/User";
-import { TUpdateUserRequestDto } from "../../../domain/usecases/user/update/TUpdateUserRequestDto";
+import { TUpdateUserRequestDto } from "../../../controllers/user/userDtos/request/TUpdateUserRequestDto";
 import { TPersistedUser } from "./TPersistedUser";
 
 export interface IUserRepository {

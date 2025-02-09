@@ -1,10 +1,11 @@
 import { Task } from "../../../entities/task/Task";
 import { ITaskRepository } from "../../../../infra/repository/task/ITaskRepository";
 import { IUseCase } from "../../IUseCase";
-import { TRequestCreateTaskDto } from "./TRequestCreateTaskDto";
-import { TTaskResponseDto } from "../TTaskResponseDto";
+import { TCreateTaskRequestDto } from "../../../../controllers/task/taskDtos/request/TCreateTaskRequestDto";
+import { TTaskResponseDto } from "../../../../controllers/task/taskDtos/response/TTaskResponseDto";
+import mongoose from "mongoose";
 
-export class CreateTask implements IUseCase<TRequestCreateTaskDto, TTaskResponseDto> {
+export class CreateTask implements IUseCase<TCreateTaskRequestDto, TTaskResponseDto> {
    
     private taskRepository: ITaskRepository;
 
@@ -16,9 +17,11 @@ export class CreateTask implements IUseCase<TRequestCreateTaskDto, TTaskResponse
         return new CreateTask(taskRepository);
     }
 
-    public async execute(input: TRequestCreateTaskDto): Promise<TTaskResponseDto> {
+    public async execute(input: TCreateTaskRequestDto): Promise<TTaskResponseDto> {
+
+        const userId = new mongoose.Types.ObjectId(input.user); 
         
-        const task = Task.create(input.title, input.description , input.user);
+        const task = Task.create(input.title, input.description || "", userId);
 
         try {
             const persistedTask = await this.taskRepository.save(task);

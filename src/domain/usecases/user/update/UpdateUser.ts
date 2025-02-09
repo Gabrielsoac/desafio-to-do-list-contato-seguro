@@ -1,8 +1,8 @@
 import { UserAlreadyExistsError } from "../../../../errors/user/UserAlreadyExistsError";
 import { IUserRepository } from "../../../../infra/repository/user/IUserRepository";
 import { IUseCase } from "../../IUseCase";
-import { TUserResponseDto } from "../TUserResponseDto";
-import { TUpdateUserRequestDto } from "./TUpdateUserRequestDto";
+import { TUserResponseDto } from "../../../../controllers/user/userDtos/response/TUserResponseDto";
+import { TUpdateUserRequestDto } from "../../../../controllers/user/userDtos/request/TUpdateUserRequestDto";
 
 export class UpdateUserById implements IUseCase<TUpdateUserRequestDto, TUserResponseDto> {
 

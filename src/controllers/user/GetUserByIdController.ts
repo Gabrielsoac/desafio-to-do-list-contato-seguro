@@ -2,9 +2,9 @@
 import { NextFunction, Request, Response } from "express";
 import { MongodbUserRepository } from "../../infra/repository/user/MongodbUserRepository";
 import { FindUserById } from "../../domain/usecases/user/findOne/FindUserById";
-import { TFindUserRequestDto } from "../../domain/usecases/user/findOne/TFindUserRequest";
+import { TFindUserRequestDto } from "./userDtos/request/TFindUserRequest";
 import { StatusCodes } from "http-status-codes";
-import { TUserResponseDto } from "../../domain/usecases/user/TUserResponseDto";
+import { TUserResponseDto } from "./userDtos/response/TUserResponseDto";
 
 const userRepository = new MongodbUserRepository;
 const findUserById = FindUserById.create(userRepository);

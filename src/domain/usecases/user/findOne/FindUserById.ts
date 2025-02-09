@@ -1,8 +1,8 @@
 import { UserNotFoundError } from "../../../../errors/user/UserNotFoundError";
 import { IUserRepository } from "../../../../infra/repository/user/IUserRepository";
 import { IUseCase } from "../../IUseCase";
-import { TUserResponseDto } from "../TUserResponseDto";
-import { TFindUserRequestDto } from "./TFindUserRequest";
+import { TUserResponseDto } from "../../../../controllers/user/userDtos/response/TUserResponseDto";
+import { TFindUserRequestDto } from "../../../../controllers/user/userDtos/request/TFindUserRequest";
 
 export class FindUserById implements IUseCase<TFindUserRequestDto, TUserResponseDto> {
 

@@ -1,4 +1,4 @@
-import { TTaskResponseDto } from "../TTaskResponseDto"
+import { TTaskResponseDto } from "./TTaskResponseDto"
 
 export type TAllTasksResponseDto = {
     tasks: TTaskResponseDto[]

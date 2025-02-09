@@ -2,8 +2,8 @@ import { UserNotFoundError } from "../../../../errors/user/UserNotFoundError";
 import { ITaskRepository } from "../../../../infra/repository/task/ITaskRepository";
 import { IUserRepository } from "../../../../infra/repository/user/IUserRepository";
 import { IUseCase } from "../../IUseCase";
-import { TAllTasksResponseDto } from "../findAll/TAllTasksResponseDto";
-import { TFindUserRequestDto } from "../../user/findOne/TFindUserRequest";
+import { TAllTasksResponseDto } from "../../../../controllers/task/taskDtos/response/TAllTasksResponseDto";
+import { TFindUserRequestDto } from "../../../../controllers/user/userDtos/request/TFindUserRequest";
 
 export class FindAllTasksByUser implements IUseCase<TFindUserRequestDto, TAllTasksResponseDto> {
 

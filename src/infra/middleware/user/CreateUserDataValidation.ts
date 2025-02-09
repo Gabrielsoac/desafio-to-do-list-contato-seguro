@@ -1,5 +1,5 @@
 import * as yup from 'yup'
-import { TCreateUserRequestDto } from '../../../domain/usecases/user/create/TCreateUserRequestDto'
+import { TCreateUserRequestDto } from '../../../controllers/user/userDtos/request/TCreateUserRequestDto'
 import { validation } from '../Validation';
 
 const bodyValidation: yup.ObjectSchema<TCreateUserRequestDto> =

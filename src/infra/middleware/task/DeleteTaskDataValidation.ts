@@ -1,8 +1,8 @@
 import * as yup from 'yup'
 import { validation } from '../Validation';
-import { TFindTaskById } from '../../../domain/usecases/task/delete/TFindTaskById';
+import { TGetTaskByIdRequestDto } from '../../../controllers/task/taskDtos/request/TGetTaskByIdRequestDto';
 
-const paramsValidation: yup.ObjectSchema<TFindTaskById> =
+const paramsValidation: yup.ObjectSchema<TGetTaskByIdRequestDto> =
     yup.object().shape(
         {
             id: yup.string().required().min(1)

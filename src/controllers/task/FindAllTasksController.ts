@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { TAllTasksResponseDto } from "../../domain/usecases/task/findAll/TAllTasksResponseDto";
+import { TAllTasksResponseDto } from "./taskDtos/response/TAllTasksResponseDto";
 import { StatusCodes } from "http-status-codes";
 import { MongoDBTaskRepository } from "../../infra/repository/task/MongoDBTaskRepository";
 import { FindAllTasks } from "../../domain/usecases/task/findAll/FindAllTasks";

@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-empty-object-type */
 import { NextFunction, Request, Response } from "express";
-import { TCreateUserRequestDto } from "../../domain/usecases/user/create/TCreateUserRequestDto";
-import { TUserResponseDto } from "../../domain/usecases/user/TUserResponseDto";
-import { TFindUserRequestDto } from "../../domain/usecases/user/findOne/TFindUserRequest";
+import { TCreateUserRequestDto } from "./userDtos/request/TCreateUserRequestDto";
+import { TUserResponseDto } from "./userDtos/response/TUserResponseDto";
+import { TFindUserRequestDto } from "./userDtos/request/TFindUserRequest";
 import { UpdateUserById } from "../../domain/usecases/user/update/UpdateUser";
 import { MongodbUserRepository } from "../../infra/repository/user/MongodbUserRepository";
 import { StatusCodes } from "http-status-codes";

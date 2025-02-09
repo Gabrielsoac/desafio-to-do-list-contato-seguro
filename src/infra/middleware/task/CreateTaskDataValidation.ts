@@ -1,8 +1,8 @@
 import * as yup from 'yup'
 import { validation } from '../Validation';
-import { TRequestCreateTaskDto } from '../../../domain/usecases/task/create/TRequestCreateTaskDto';
+import { TCreateTaskRequestDto } from '../../../controllers/task/taskDtos/request/TCreateTaskRequestDto';
 
-const bodyValidation: yup.ObjectSchema<TRequestCreateTaskDto> =
+const bodyValidation: yup.ObjectSchema<TCreateTaskRequestDto> =
     yup.object().shape(
         {
             title: yup.string().required().min(3),

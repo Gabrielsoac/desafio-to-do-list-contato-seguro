@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { TFindUserRequestDto } from "../../domain/usecases/user/findOne/TFindUserRequest";
+import { TFindUserRequestDto } from "./userDtos/request/TFindUserRequest";
 import { MongodbUserRepository } from "../../infra/repository/user/MongodbUserRepository";
 import { DeleteUserById } from "../../domain/usecases/user/delete/DeleteUser";
 import { StatusCodes } from "http-status-codes";

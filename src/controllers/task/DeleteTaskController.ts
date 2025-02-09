@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { NextFunction, Request, Response } from "express"
-import { TFindTaskById } from "../../domain/usecases/task/delete/TFindTaskById"
+import { TGetTaskByIdRequestDto } from "./taskDtos/request/TGetTaskByIdRequestDto"
 import { StatusCodes } from "http-status-codes"
 import { MongoDBTaskRepository } from "../../infra/repository/task/MongoDBTaskRepository"
 import { DeleteTaskById } from "../../domain/usecases/task/delete/DeleteTaskById"
@@ -9,7 +9,7 @@ const taskRepository = new MongoDBTaskRepository;
 const deleteTask = DeleteTaskById.create(taskRepository);
 
 export const DeleteTaskController =  async (
-    req: Request<TFindTaskById>,
+    req: Request<TGetTaskByIdRequestDto>,
     res: Response<void>,
     next: NextFunction) => {
 

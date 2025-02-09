@@ -3,7 +3,7 @@ import { User } from "../../../domain/entities/user/User";
 import { UserAlreadyExistsError } from "../../../errors/user/UserAlreadyExistsError";
 import { UserNotFoundError } from "../../../errors/user/UserNotFoundError";
 import { UserModel } from "../../../models/UserModel";
-import { TUpdateUserRequestDto } from "../../../domain/usecases/user/update/TUpdateUserRequestDto";
+import { TUpdateUserRequestDto } from "../../../controllers/user/userDtos/request/TUpdateUserRequestDto";
 import { IUserRepository } from "./IUserRepository";
 import { TPersistedUser } from "./TPersistedUser";
 
