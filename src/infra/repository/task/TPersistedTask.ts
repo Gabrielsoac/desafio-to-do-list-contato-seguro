@@ -6,6 +6,6 @@ export type TPersistedTask = {
     description: string,
     status: TaskStatus,
     userID: string,
-    createdAt: Date,
-    updatedAt: Date
+    createdAt: string,
+    updatedAt: string
 } 
