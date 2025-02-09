@@ -10,5 +10,544 @@
   "schemes": [
     "http"
   ],
-  "paths": {}
+  "paths": {
+    "/health": {
+      "get": {
+        "summary": "Health Check",
+        "description": "Endpoint para verificar a saúde da aplicação. Ideal para healthy check com Docker Compose.",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Aplicação está saudável"
+          }
+        }
+      }
+    },
+    "/task": {
+      "post": {
+        "summary": "Criação de Tarefa",
+        "description": "Endpoint para criar uma nova tarefa:   Sobre os dados:  - title é obrigatório  - description é optional, caso não seja informado, será retornado como uma string vazia  - user recebe o ID do usuário no padrão do mongodb com 24 caracterers",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "title",
+                "user"
+              ],
+              "properties": {
+                "title": {
+                  "type": "string",
+                  "description": "O título da tarefa. Este campo é obrigatório.",
+                  "example": "Dormir"
+                },
+                "description": {
+                  "type": "string",
+                  "description": "A descrição da tarefa. Este campo é opcional e será uma string vazia se não for fornecido.",
+                  "example": "Dormir 22:30 todos os dias"
+                },
+                "user": {
+                  "type": "string",
+                  "description": "O ID do usuário. Deve ser uma string de 24 caracteres.",
+                  "minLength": 24,
+                  "maxLength": 24,
+                  "example": "67a80a413605da57c732366d"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Tarefa criada com sucesso",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "example": "67a8ea014f6913d2bef8ea81"
+                },
+                "title": {
+                  "type": "string",
+                  "example": "Dormir"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "Dormir 22:30 todos os dias"
+                },
+                "status": {
+                  "type": "string",
+                  "example": "pending"
+                },
+                "userID": {
+                  "type": "string",
+                  "example": "67a80a413605da57c732366d"
+                },
+                "createdAt": {
+                  "type": "string",
+                  "example": "09 de fevereiro de 2025 às 14:46:41"
+                },
+                "updatedAt": {
+                  "type": "string",
+                  "example": "09 de fevereiro de 2025 às 14:46:41"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "Usuário não encontrado",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "statusCode": {
+                  "type": "number",
+                  "example": 400
+                },
+                "message": {
+                  "type": "string",
+                  "example": "User not found"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "Listar Tarefas",
+        "description": "Endpoint para listar todas as tarefas criadas. Retorna um 200 OK se bem-sucedido ou um 500 Internal Server Error em caso de falha.",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Tarefas listadas com sucesso",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "tasks": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "example": "67a8af9aa432783b8f0c680b"
+                      },
+                      "title": {
+                        "type": "string",
+                        "example": "Fazer exercícios"
+                      },
+                      "description": {
+                        "type": "string",
+                        "example": "Caminhada de 30 minutos"
+                      },
+                      "status": {
+                        "type": "string",
+                        "example": "completed"
+                      },
+                      "userID": {
+                        "type": "string",
+                        "example": "67a80a413605da57c732366d"
+                      },
+                      "createdAt": {
+                        "type": "string",
+                        "example": "09 de fevereiro de 2025 às 10:37:30"
+                      },
+                      "updatedAt": {
+                        "type": "string",
+                        "example": "09 de fevereiro de 2025 às 10:37:30"
+                      }
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "500": {
+            "description": "Erro interno do servidor",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "number",
+                  "example": 500
+                },
+                "message": {
+                  "type": "string",
+                  "example": "INTERNAL SERVER ERROR"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/task/{id}": {
+      "delete": {
+        "summary": "Exclusão de Task",
+        "description": "Endpoint para excluir uma task específica pelo ID.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "minLength": 24,
+            "maxLength": 24,
+            "description": "O ID da task a ser excluída."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Task excluída com sucesso"
+          },
+          "404": {
+            "description": "Task não encontrada",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "number",
+                  "example": 404
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Task não encontrada"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "500": {
+            "description": "Erro interno no servidor",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "number",
+                  "example": 500
+                },
+                "message": {
+                  "type": "string",
+                  "example": "INTERNAL SERVER ERROR"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Atualização de Task",
+        "description": "Endpoint para atualizar uma task específica pelo ID.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "minLength": 24,
+            "maxLength": 24,
+            "description": "O ID da task a ser atualizada."
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "type": "string",
+                  "description": "O novo título da task.",
+                  "example": "Jogar bola"
+                },
+                "description": {
+                  "type": "string",
+                  "description": "A nova descrição da task. Este campo é opcional e será uma string vazia se não for fornecido.",
+                  "example": "Com os amigos"
+                },
+                "status": {
+                  "type": "string",
+                  "description": "O novo status da task (pending, in_progress, completed).",
+                  "example": "in_progress"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Task atualizada com sucesso",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "example": "67a8ac8b31f335f784a9429b"
+                },
+                "title": {
+                  "type": "string",
+                  "example": "Jogar bola"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "Com os amigos"
+                },
+                "status": {
+                  "type": "string",
+                  "example": "in_progress"
+                },
+                "userID": {
+                  "type": "string",
+                  "example": "67a80a413605da57c732366d"
+                },
+                "createdAt": {
+                  "type": "string",
+                  "example": "09 de fevereiro de 2025 às 10:24:27"
+                },
+                "updatedAt": {
+                  "type": "string",
+                  "example": "09 de fevereiro de 2025 às 10:37:42"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "404": {
+            "description": "Task não encontrada",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "number",
+                  "example": 404
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Task não encontrada"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "500": {
+            "description": "Erro interno no servidor",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "number",
+                  "example": 500
+                },
+                "message": {
+                  "type": "string",
+                  "example": "INTERNAL SERVER ERROR"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/task/user/{id}": {
+      "get": {
+        "summary": "Listagem de Tasks por Usuário",
+        "description": "Endpoint para listar todas as tasks de um usuário específico pelo ID do usuário.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "minLength": 24,
+            "maxLength": 24,
+            "description": "O ID do usuário cujas tasks serão listadas."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Tasks do usuário listadas com sucesso",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "tasks": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "example": "67a8f686cb56b17a95994842"
+                      },
+                      "title": {
+                        "type": "string",
+                        "example": "Dormir"
+                      },
+                      "description": {
+                        "type": "string",
+                        "example": "Dormir 22:30 todos os dias"
+                      },
+                      "status": {
+                        "type": "string",
+                        "example": "pending"
+                      },
+                      "userID": {
+                        "type": "string",
+                        "example": "67a8f680cb56b17a95994840"
+                      },
+                      "createdAt": {
+                        "type": "string",
+                        "example": "09 de fevereiro de 2025 às 15:40:06"
+                      },
+                      "updatedAt": {
+                        "type": "string",
+                        "example": "09 de fevereiro de 2025 às 15:40:06"
+                      }
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "404": {
+            "description": "Usuário não encontrado",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "number",
+                  "example": 404
+                },
+                "message": {
+                  "type": "string",
+                  "example": "usuário não encontrado"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user": {
+      "post": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "get": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/user/{id}": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "put": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "delete": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    }
+  }
 }

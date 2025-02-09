@@ -6,6 +6,18 @@ const HealthCheckRoutes = Router();
 HealthCheckRoutes.get(
     '/health',
     healthCheck
-);
-
-export { HealthCheckRoutes }
+    
+   // #swagger.auto = false
+  /*  #swagger.path = '/health'
+      #swagger.method = 'get'
+      #swagger.produces = ['application/json']
+      #swagger.summary = 'Health Check'
+      #swagger.description = 'Endpoint para verificar a saúde da aplicação. Ideal para healthy check com Docker Compose.'
+      #swagger.responses[200] = {
+          description: 'Aplicação está saudável'
+      }
+  */
+  );
+  
+  export { HealthCheckRoutes }
+  

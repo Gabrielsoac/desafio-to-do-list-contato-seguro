@@ -1,18 +1,20 @@
 import swaggerAutogen from 'swagger-autogen';
 import { Express } from 'express';
 import swaggerUi from 'swagger-ui-express';
+import path from 'path';
+import 'dotenv/config';
 
-const outputFile = './swagger.json';
-const endpointsFiles = ['./src/routes/*.ts'];
-const PORT = process.env.PORT;
+const outputFile = path.resolve(__dirname, './swagger.json');
+const endpointsFiles = ['./**/*.ts'];
+const PORT = process.env.PORT || 3000;
 
-export const genSwaggerDoc = () => {
-  swaggerAutogen(outputFile, endpointsFiles);
+export const genSwaggerDoc = async () => {
+  await swaggerAutogen(outputFile, endpointsFiles);
 }
 
 export const setUpSwagger = async (server: Express) => {
   
-  genSwaggerDoc();
+  await genSwaggerDoc();
 
   const swaggerDocument = await import(outputFile);
 
