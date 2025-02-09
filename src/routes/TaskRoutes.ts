@@ -17,10 +17,24 @@ TaskRoutes.post(
     CreateTaskDataValidation,
     CreateTaskController
 
-    //Documentação com Swagger 2.0
+    // Documentação com Swagger API 2.0
+    // Cria uma Task
+    // A Task precisa ter título e userId
+    // A descrição é opcional, caso não seja enviada, é retornado como uma string vazia
+
+    // O retorno contém
+    /*
+        id
+        title
+        description
+        userId
+        status (padrão pending)
+        createdAt
+        updatedAt
+    */
 
     // #swagger.auto = true
-    /*  
+/*  
     #swagger.path = '/task'
     #swagger.method = 'post'
     #swagger.produces = ['application/json']
@@ -31,7 +45,7 @@ TaskRoutes.post(
     - title é obrigatório
     - description é optional, caso não seja informado, será retornado como uma string vazia
     - user recebe o ID do usuário no padrão do mongodb com 24 caracterers'
-    
+
     #swagger.parameters['body'] = {
         in: 'body',
         required: true,
@@ -59,7 +73,7 @@ TaskRoutes.post(
             }
         }
     }
-    
+
     #swagger.responses[201] = {
         description: 'Tarefa criada com sucesso',
         schema: {
@@ -70,6 +84,15 @@ TaskRoutes.post(
             userID: '67a80a413605da57c732366d',
             createdAt: '09 de fevereiro de 2025 às 14:46:41',
             updatedAt: '09 de fevereiro de 2025 às 14:46:41'
+        },
+        headers: {
+            location: {
+                description: 'URI do novo recurso criado',
+                schema: {
+                    type: 'string',
+                    example: '/task/67a8ea014f6913d2bef8ea81'
+                }
+            }
         }
     }
 
@@ -89,6 +112,7 @@ TaskRoutes.get(
     FindAllTasksController
 
     //Documentação com Swagger 2.0
+    // Retorna todas as tasks criadas, de todos os usuários
 
      // #swagger.auto = false
     /*
@@ -132,6 +156,7 @@ TaskRoutes.delete(
     DeleteTaskController
 
     //Documentação com Swagger 2.0
+    //Deleta uma task pelo ID
     
     // #swagger.auto = false
 
@@ -179,6 +204,20 @@ TaskRoutes.put(
     UpdateTaskController
 
     //Documentação com Swagger 2.0
+    // A Task precisa ter título, userId e status
+    // A descrição é opcional, caso não seja enviada, é retornado como uma string vazia
+    // o status é um enum: pending, in_progress ou completed
+
+    // O retorno contém
+    /*
+        id
+        title
+        description
+        userId
+        status (padrão pending)
+        createdAt
+        updatedAt
+    */
 
     // #swagger.auto = false
     /*
@@ -260,6 +299,7 @@ TaskRoutes.get(
     FindAllTasksByUserController
 
     //Documentação com Swagger 2.0
+    //Retorna todas as tasks de um usuário recebido via params
 
     // #swagger.auto = false
     /*  

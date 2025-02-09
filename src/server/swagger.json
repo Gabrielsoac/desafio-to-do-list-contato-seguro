@@ -14,7 +14,7 @@
     "/health": {
       "get": {
         "summary": "Health Check",
-        "description": "Endpoint para verificar a saúde da aplicação. Ideal para healthy check com Docker Compose.",
+        "description": "Endpoint para verificar a saúde da aplicação com Docker Compose.",
         "produces": [
           "application/json"
         ],
