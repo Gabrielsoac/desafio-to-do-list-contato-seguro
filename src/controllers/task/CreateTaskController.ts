@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-empty-object-type */
 import { NextFunction, Request, Response } from "express";
-import { TRequestCreateTaskDto } from "../../usecases/task/create/TRequestCreateTaskDto";
-import { TTaskResponseDto } from "../../usecases/task/TTaskResponseDto";
-import { CreateTask } from "../../usecases/task/create/CreateTask";
-import { MongoDBTaskRepository } from "../../repository/task/MongoDBTaskRepository";
+import { TRequestCreateTaskDto } from "../../domain/usecases/task/create/TRequestCreateTaskDto";
+import { TTaskResponseDto } from "../../domain/usecases/task/TTaskResponseDto";
+import { CreateTask } from "../../domain/usecases/task/create/CreateTask";
+import { MongoDBTaskRepository } from "../../infra/repository/task/MongoDBTaskRepository";
 import { StatusCodes } from "http-status-codes";
 
 const mongodb = new MongoDBTaskRepository;

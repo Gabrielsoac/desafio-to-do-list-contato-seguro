@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-empty-object-type */
 import { NextFunction, Request, Response } from "express";
-import { MongodbUserRepository } from "../../repository/user/MongodbUserRepository";
-import { FindUserById } from "../../usecases/user/findOne/FindUserById";
-import { TFindUserRequestDto } from "../../usecases/user/findOne/TFindUserRequest";
+import { MongodbUserRepository } from "../../infra/repository/user/MongodbUserRepository";
+import { FindUserById } from "../../domain/usecases/user/findOne/FindUserById";
+import { TFindUserRequestDto } from "../../domain/usecases/user/findOne/TFindUserRequest";
 import { StatusCodes } from "http-status-codes";
-import { TUserResponseDto } from "../../usecases/user/TUserResponseDto";
+import { TUserResponseDto } from "../../domain/usecases/user/TUserResponseDto";
 
 const userRepository = new MongodbUserRepository;
 const findUserById = FindUserById.create(userRepository);

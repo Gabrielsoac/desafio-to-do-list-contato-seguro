@@ -1,9 +1,9 @@
 import { NextFunction, Request, Response } from "express";
-import { TCreateUserRequestDto } from "../../usecases/user/create/TCreateUserRequestDto";
-import { TUserResponseDto } from "../../usecases/user/TUserResponseDto";
+import { TCreateUserRequestDto } from "../../domain/usecases/user/create/TCreateUserRequestDto";
+import { TUserResponseDto } from "../../domain/usecases/user/TUserResponseDto";
 import { StatusCodes } from "http-status-codes";
-import { CreateUser } from "../../usecases/user/create/CreateUser";
-import { MongodbUserRepository } from "../../repository/user/MongodbUserRepository";
+import { CreateUser } from "../../domain/usecases/user/create/CreateUser";
+import { MongodbUserRepository } from "../../infra/repository/user/MongodbUserRepository";
 
 const userRepository = new MongodbUserRepository;
 const createUser = CreateUser.create(userRepository); 

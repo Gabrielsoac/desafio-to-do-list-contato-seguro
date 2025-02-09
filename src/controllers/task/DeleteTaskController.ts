@@ -1,10 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { NextFunction, Request, Response } from "express"
-import { TFindTaskById } from "../../usecases/task/delete/TFindTaskById"
+import { TFindTaskById } from "../../domain/usecases/task/delete/TFindTaskById"
 import { StatusCodes } from "http-status-codes"
-import { MongoDBTaskRepository } from "../../repository/task/MongoDBTaskRepository"
-import { DeleteTaskById } from "../../usecases/task/delete/DeleteTaskById"
-import { TaskNotFoundError } from "../../errors/task/TaskNotFoundException"
+import { MongoDBTaskRepository } from "../../infra/repository/task/MongoDBTaskRepository"
+import { DeleteTaskById } from "../../domain/usecases/task/delete/DeleteTaskById"
 
 const taskRepository = new MongoDBTaskRepository;
 const deleteTask = DeleteTaskById.create(taskRepository);

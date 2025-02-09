@@ -1,7 +1,7 @@
 import express from "express";
 import { routes } from "../routes/Routes";
 import { setupSwagger } from "./swagger";
-import { ResponseError } from "../middleware/responseErrors/ResponseErrors";
+import { ResponseError } from "../infra/middleware/responseErrors/ResponseErrors";
 
 const server = express();
 

@@ -1,5 +1,5 @@
 import { server } from "./server/Server";
-import { connectDB } from "./database/Mongodb";
+import { connectDB } from "./infra/database/Mongodb";
 import 'dotenv/config';
 
 const PORT = process.env.PORT || 3000;

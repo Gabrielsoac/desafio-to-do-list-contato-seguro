@@ -1,10 +1,10 @@
 import { NextFunction, Request, Response } from "express";
-import { TAllTasksResponseDto } from "../../usecases/task/findAll/TAllTasksResponseDto";
+import { TAllTasksResponseDto } from "../../domain/usecases/task/findAll/TAllTasksResponseDto";
 import { StatusCodes } from "http-status-codes";
-import { MongoDBTaskRepository } from "../../repository/task/MongoDBTaskRepository";
-import { TFindUserRequestDto } from "../../usecases/user/findOne/TFindUserRequest";
-import { FindAllTasksByUser } from "../../usecases/task/findAllTasksByUser/FindAllTasksByUser";
-import { MongodbUserRepository } from "../../repository/user/MongodbUserRepository";
+import { MongoDBTaskRepository } from "../../infra/repository/task/MongoDBTaskRepository";
+import { TFindUserRequestDto } from "../../domain/usecases/user/findOne/TFindUserRequest";
+import { FindAllTasksByUser } from "../../domain/usecases/task/findAllTasksByUser/FindAllTasksByUser";
+import { MongodbUserRepository } from "../../infra/repository/user/MongodbUserRepository";
 
 const taskRepository = new MongoDBTaskRepository;
 const userRepository = new MongodbUserRepository;

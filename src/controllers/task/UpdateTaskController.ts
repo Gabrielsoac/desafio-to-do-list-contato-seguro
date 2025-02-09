@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-empty-object-type */
 import { NextFunction, Request, Response } from "express";
-import { TTaskResponseDto } from "../../usecases/task/TTaskResponseDto";
-import { TFindTaskById } from "../../usecases/task/delete/TFindTaskById";
+import { TTaskResponseDto } from "../../domain/usecases/task/TTaskResponseDto";
+import { TFindTaskById } from "../../domain/usecases/task/delete/TFindTaskById";
 import { StatusCodes } from "http-status-codes";
-import { MongoDBTaskRepository } from "../../repository/task/MongoDBTaskRepository";
-import { UpdateTaskById } from "../../usecases/task/update/UpdateTaskById";
+import { MongoDBTaskRepository } from "../../infra/repository/task/MongoDBTaskRepository";
+import { UpdateTaskById } from "../../domain/usecases/task/update/UpdateTaskById";
 import { TaskStatus } from "../../domain/entities/task/EnumTaskStatus";
 
 export type TRequestUpdateTaskDto = {

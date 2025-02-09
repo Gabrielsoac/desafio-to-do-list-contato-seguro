@@ -1,9 +1,9 @@
 import { NextFunction, Request, Response } from "express";
-import { TFindUserRequestDto } from "../../usecases/user/findOne/TFindUserRequest";
-import { MongodbUserRepository } from "../../repository/user/MongodbUserRepository";
-import { DeleteUserById } from "../../usecases/user/delete/DeleteUser";
+import { TFindUserRequestDto } from "../../domain/usecases/user/findOne/TFindUserRequest";
+import { MongodbUserRepository } from "../../infra/repository/user/MongodbUserRepository";
+import { DeleteUserById } from "../../domain/usecases/user/delete/DeleteUser";
 import { StatusCodes } from "http-status-codes";
-import { MongoDBTaskRepository } from "../../repository/task/MongoDBTaskRepository";
+import { MongoDBTaskRepository } from "../../infra/repository/task/MongoDBTaskRepository";
 
 export const DeleteUserController = async (
     req: Request<TFindUserRequestDto>,

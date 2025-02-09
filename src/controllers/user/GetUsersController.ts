@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
-import { TUsersResponseDto } from "../../usecases/user/findAll/TUsersResponseDto";
-import { FindAllUsers } from "../../usecases/user/findAll/FindAllUsers";
-import { MongodbUserRepository } from "../../repository/user/MongodbUserRepository";
+import { TUsersResponseDto } from "../../domain/usecases/user/findAll/TUsersResponseDto";
+import { FindAllUsers } from "../../domain/usecases/user/findAll/FindAllUsers";
+import { MongodbUserRepository } from "../../infra/repository/user/MongodbUserRepository";
 import { StatusCodes } from "http-status-codes";
 
 export const GetUsersController = async (
