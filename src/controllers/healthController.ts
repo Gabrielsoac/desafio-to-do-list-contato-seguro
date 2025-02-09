@@ -7,6 +7,6 @@ export const healthCheck = (_: Request, res: Response) => {
 }
 
 export const healthCors = {
-    origin: 'http://localhost:3000',
+    origin: '*',
     methods: ['GET'],
 }

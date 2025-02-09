@@ -4,7 +4,7 @@ import 'dotenv/config';
 const USER = process.env.MONGODB_USER;
 const PASSWORD = process.env.MONGODB_PASSWORD;
 
-const dbURI = `mongodb://${USER}:${PASSWORD}@localhost:27017/tasks?authSource=admin`;
+const dbURI = `mongodb://${USER}:${PASSWORD}@mongodb:27017/tasks?authSource=admin`;
 
 export const connectDB = async () => {
     try {

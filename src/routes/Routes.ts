@@ -1,6 +1,5 @@
 import { Router } from 'express';
-import { healthCheck, healthCors } from '../controllers/healthController';
-import  cors  from 'cors';
+import { healthCheck } from '../controllers/healthController';
 import { CreateTaskController } from '../controllers/task/CreateTaskController';
 import { CreateUserController } from '../controllers/user/CreateUserController';
 import { GetUserByIdController } from '../controllers/user/GetUserByIdController';
@@ -17,12 +16,12 @@ import { DeleteUserByIdDataValidation } from '../middleware/user/DeleteUserDataV
 import { CreateTaskDataValidation } from '../middleware/task/CreateTaskDataValidation';
 import { DeleteTaskDataValidation } from '../middleware/task/DeleteTaskDataValidation';
 import { UpdateTaskByIdDataValidation } from '../middleware/task/UpdateTaskDataValidation';
+import { FindAllTasksByUserController } from '../controllers/task/FindAllTasksByUserController';
 
 const routes = Router();
 
 routes.get(
     '/health',
-    cors(healthCors),
     healthCheck
 );
 
@@ -37,6 +36,6 @@ routes.post('/task', CreateTaskDataValidation, CreateTaskController);
 routes.get('/task', FindAllTasksController);
 routes.delete('/task/:id', DeleteTaskDataValidation, DeleteTaskController);
 routes.put('/task/:id', UpdateTaskByIdDataValidation, UpdateTaskController);
-routes.get('/task/user/:id', FindUserByIdDataValidation, FindAllTasksController);
+routes.get('/task/user/:id', FindUserByIdDataValidation, FindAllTasksByUserController);
 
 export { routes }

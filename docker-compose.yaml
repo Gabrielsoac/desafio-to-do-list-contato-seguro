@@ -1,0 +1,41 @@
+services:
+  app:
+    image: node:23-alpine3.20
+    volumes:
+      - .:/app                   
+      - /app/node_modules          
+    working_dir: /app            
+    ports:
+      - "3000:3000"            
+    depends_on:
+      - mongodb
+    environment:
+      MONGODB_URL: mongodb://mongodb:27017/task
+      MONGODB_USER: TESTE
+      MONGODB_PASSWORD: TESTE123
+      PORT: 3000
+    command: >
+      sh -c "apk add curl && npm install && npm install -g typescript && npm run dev"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "localhost:3000/health"]
+      interval: 15s            
+      retries: 5               
+      start_period: 30s
+      timeout: 10s
+
+  mongodb:
+    image: mongo:5.0
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: TESTE
+      MONGO_INITDB_ROOT_PASSWORD: TESTE123
+    volumes:
+      - mongodb_data:/data/db
+
+volumes:
+  mongodb_data:
+
+
+
+

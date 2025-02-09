@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import mongoose from "mongoose";
 import { TaskStatus } from "../../domain/entities/task/EnumTaskStatus";
 import { Task } from "../../domain/entities/task/Task";
 import { TaskNotFoundError } from "../../errors/task/TaskNotFoundException";
@@ -115,9 +116,8 @@ export class MongoDBTaskRepository implements ITaskRepository {
 
     async findAllTasksByUser(userId: string): Promise<TPersistedAllTasks> {
         
-
         try {
-            const tasks = await TaskModel.find({user: userId});
+            const tasks = await TaskModel.find({ user: userId });
             const tasksDto = tasks.map(
                 task => (
                     {

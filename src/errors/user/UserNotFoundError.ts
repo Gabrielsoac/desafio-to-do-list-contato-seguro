@@ -7,7 +7,7 @@ export class UserNotFoundError extends Error {
     
     constructor(message: string){
         super(message);
-        this.name = 'Not Found';
+        this.name = 'User Not Found';
         this.statusCode = StatusCodes.NOT_FOUND;
     }
 }

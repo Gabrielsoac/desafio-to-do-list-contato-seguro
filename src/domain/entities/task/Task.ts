@@ -1,3 +1,4 @@
+import mongoose from "mongoose";
 import { TTaskProps } from "./TTaskProps";
 
 export class Task {
@@ -11,7 +12,7 @@ export class Task {
     public static create(
         title: string,
         description: string,
-        user: string){
+        user: mongoose.Types.ObjectId){
             
         return new Task({title, description, user});
     }

@@ -3,14 +3,14 @@ import { TAllTasksResponseDto } from "../../usecases/task/findAll/TAllTasksRespo
 import { StatusCodes } from "http-status-codes";
 import { MongoDBTaskRepository } from "../../repository/task/MongoDBTaskRepository";
 import { TFindUserRequestDto } from "../../usecases/user/findOne/TFindUserRequest";
-import { FindAllTasksByUser } from "../../usecases/findAllTasksByUser/FindAllTasksByUser";
+import { FindAllTasksByUser } from "../../usecases/task/findAllTasksByUser/FindAllTasksByUser";
 import { MongodbUserRepository } from "../../repository/user/MongodbUserRepository";
 
 const taskRepository = new MongoDBTaskRepository;
 const userRepository = new MongodbUserRepository;
 const findAllTasksByUser = FindAllTasksByUser.create(userRepository, taskRepository);
 
-export const FindAllTasksController = async (
+export const FindAllTasksByUserController = async (
     req: Request<TFindUserRequestDto>,
     res: Response<TAllTasksResponseDto>,
     next: NextFunction) => {
