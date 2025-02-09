@@ -15,7 +15,6 @@ export class MongoDBTaskRepository implements ITaskRepository {
     async save(task: Task): Promise<TPersistedTask> {
         
         try {
-
             const taskPersisted = await TaskModel.create({
                 title: task.getTitle(),
                 description: task.getDescription(),

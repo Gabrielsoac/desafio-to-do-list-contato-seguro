@@ -6,9 +6,11 @@ import { TTaskResponseDto } from "./taskDtos/response/TTaskResponseDto";
 import { CreateTask } from "../../domain/usecases/task/create/CreateTask";
 import { MongoDBTaskRepository } from "../../infra/repository/task/MongoDBTaskRepository";
 import { StatusCodes } from "http-status-codes";
+import { MongodbUserRepository } from "../../infra/repository/user/MongodbUserRepository";
 
-const mongodb = new MongoDBTaskRepository;
-const createTaskCase = CreateTask.create(mongodb);
+const taskRepository = new MongoDBTaskRepository;
+const userRepository = new MongodbUserRepository;
+const createTaskCase = CreateTask.create(taskRepository, userRepository);
 
 export const CreateTaskController = async (
     req: Request<{}, {}, TCreateTaskRequestDto>,

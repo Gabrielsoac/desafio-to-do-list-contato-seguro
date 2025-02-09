@@ -106,6 +106,15 @@
               "xml": {
                 "name": "main"
               }
+            },
+            "headers": {
+              "location": {
+                "description": "URI do novo recurso criado",
+                "schema": {
+                  "type": "string",
+                  "example": "/task/67a8ea014f6913d2bef8ea81"
+                }
+              }
             }
           },
           "400": {
