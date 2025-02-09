@@ -8,6 +8,7 @@ import { ITaskRepository } from "./ITaskRepository";
 import { TPersistedAllTasks } from "./TPersistedAllTasks";
 import { TPersistedTask } from "./TPersistedTask";
 import { TUpdateTaskData } from "./TUpdateTaskData";
+import { CreateOutputPersistedTask } from "./CreateOutputPersistedTask";
 
 export class MongoDBTaskRepository implements ITaskRepository {
    
@@ -22,15 +23,7 @@ export class MongoDBTaskRepository implements ITaskRepository {
                 user: task.getUser()
             });
             
-            return {
-                id: taskPersisted._id.toString(),
-                title: taskPersisted.title,
-                description: taskPersisted.description || "",
-                status: taskPersisted.status || TaskStatus.PENDING,
-                userID: taskPersisted.user._id.toString(),
-                createdAt: taskPersisted.createdAt || new Date(),
-                updatedAt: taskPersisted.updatedAt || new Date()
-            } 
+            return CreateOutputPersistedTask.create(taskPersisted);
         } 
         
         catch(err){
@@ -44,18 +37,8 @@ export class MongoDBTaskRepository implements ITaskRepository {
             const tasks = await TaskModel.find();
 
             const tasksDto = tasks.map(
-                task => (
-                    {
-                        id: task._id.toString(),
-                        title: task.title,
-                        description: task.description || "",
-                        status: task.status || TaskStatus.PENDING,
-                        userID: task.user._id.toString(),
-                        createdAt: task.createdAt || new Date(),
-                        updatedAt: task.updatedAt || new Date()
-                    }
-                )
-            )
+                task => (CreateOutputPersistedTask.create(task))
+            );
             return {tasks: tasksDto};
         }   
         catch(err){
@@ -85,15 +68,7 @@ export class MongoDBTaskRepository implements ITaskRepository {
                 throw new Error("Erro ao atualizar task");
             }
 
-            return {
-                id: taskUpdated._id.toString(),
-                title: taskUpdated.title,
-                description: taskUpdated.description || "",
-                status: taskUpdated.status || TaskStatus.PENDING,
-                userID: taskUpdated.user._id.toString(),
-                createdAt: taskUpdated.createdAt || new Date(),
-                updatedAt: taskUpdated.updatedAt || new Date()
-            } 
+            return CreateOutputPersistedTask.create(taskUpdated);
         } catch(err){
             throw new TaskNotFoundError("Task não encontrada");
         }
@@ -119,17 +94,7 @@ export class MongoDBTaskRepository implements ITaskRepository {
         try {
             const tasks = await TaskModel.find({ user: userId });
             const tasksDto = tasks.map(
-                task => (
-                    {
-                        id: task._id.toString(),
-                        title: task.title,
-                        description: task.description || "",
-                        status: task.status || TaskStatus.PENDING,
-                        userID: task.user._id.toString(),
-                        createdAt: task.createdAt || new Date(),
-                        updatedAt: task.updatedAt || new Date()
-                    }
-                )
+                task => (CreateOutputPersistedTask.create(task))
             )
 
             return {
