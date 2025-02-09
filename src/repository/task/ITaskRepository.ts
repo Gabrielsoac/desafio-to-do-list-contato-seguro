@@ -9,4 +9,5 @@ export interface ITaskRepository {
     updateTask(task: TUpdateTaskData): Promise<TPersistedTask>
     deleteTask(id: string): Promise<void>
     findAllTasksByUser(userId: string): Promise<TPersistedAllTasks>
+    deleteAllTasksByUser(id: string): Promise<void>
 }

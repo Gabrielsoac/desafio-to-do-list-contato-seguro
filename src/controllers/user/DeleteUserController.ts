@@ -3,6 +3,7 @@ import { TFindUserRequestDto } from "../../usecases/user/findOne/TFindUserReques
 import { MongodbUserRepository } from "../../repository/user/MongodbUserRepository";
 import { DeleteUserById } from "../../usecases/user/delete/DeleteUser";
 import { StatusCodes } from "http-status-codes";
+import { MongoDBTaskRepository } from "../../repository/task/MongoDBTaskRepository";
 
 export const DeleteUserController = async (
     req: Request<TFindUserRequestDto>,
@@ -10,7 +11,8 @@ export const DeleteUserController = async (
     next: NextFunction) => {
 
     const userRepository = new MongodbUserRepository;
-    const DeleteUser = DeleteUserById.create(userRepository); 
+    const taskRepository = new MongoDBTaskRepository;
+    const DeleteUser = DeleteUserById.create(userRepository, taskRepository); 
 
     try {
         await DeleteUser.execute(

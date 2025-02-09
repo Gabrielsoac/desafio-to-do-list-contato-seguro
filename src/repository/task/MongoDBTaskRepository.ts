@@ -140,4 +140,14 @@ export class MongoDBTaskRepository implements ITaskRepository {
             throw new Error("Erro ao buscar Task do usuário");
         }
     }
+
+    async deleteAllTasksByUser(id: string): Promise<void> {
+        
+        try {
+            await TaskModel.deleteMany({user: id})
+        }
+        catch {
+            throw new Error("Erro ao deletar tasks do usuário");
+        }
+    }
 }
