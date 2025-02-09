@@ -17,6 +17,7 @@ export const CreateTaskController = async (
 
     try {
         const response = await createTaskCase.execute(req.body);
+        const locationUrl = `${req.protocol}://${req.get('host')}/task/${response.id}`;
 
         res.status(StatusCodes.CREATED).json(response);
     } 
