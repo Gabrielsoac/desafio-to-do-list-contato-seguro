@@ -6,6 +6,7 @@ import { UserModel } from "../../../models/UserModel";
 import { TUpdateUserRequestDto } from "../../../controllers/user/userDtos/request/TUpdateUserRequestDto";
 import { IUserRepository } from "./IUserRepository";
 import { TPersistedUser } from "./TPersistedUser";
+import { CreateOutputPersistedUser } from "./CreateOutputPersistedUser";
 
 export class MongodbUserRepository implements IUserRepository {
     
@@ -27,11 +28,7 @@ export class MongodbUserRepository implements IUserRepository {
                 }
             );
 
-            return {
-                id: userPersisted._id.toString(),
-                name: userPersisted.name,
-                email: userPersisted.email
-            };
+            return CreateOutputPersistedUser.create(userPersisted);
 
         } catch(err) {
             throw new UserAlreadyExistsError((err as UserAlreadyExistsError).message);
@@ -46,11 +43,7 @@ export class MongodbUserRepository implements IUserRepository {
             if(!user) {
                 throw new UserNotFoundError(`Usuário com o id: ${id} não encontrado!`);
             } else {
-                return {
-                    id: user._id.toString(),
-                    name: user.name,
-                    email: user.email
-                };
+                return CreateOutputPersistedUser.create(user);
             }
         } 
         catch (err) {
@@ -64,11 +57,7 @@ export class MongodbUserRepository implements IUserRepository {
             const users = await UserModel.find();
 
             const usersDto = users.map(
-                user => ({
-                    id: user._id.toString(),
-                    name: user.name,
-                    email: user.email,
-                })
+                user => (CreateOutputPersistedUser.create(user))
             );
 
             return usersDto;
@@ -105,11 +94,8 @@ export class MongodbUserRepository implements IUserRepository {
                 throw new UserNotFoundError("Erro ao atualizar usuário");
             }
     
-            return {
-                id: userUpdated._id.toString(),
-                name: userUpdated.name,
-                email: userUpdated.email,
-            };
+            return CreateOutputPersistedUser.create(user);
+
         } catch (err) {
             if (err instanceof UserNotFoundError) {
                 throw new UserNotFoundError("Usuário não encontrado");
@@ -120,7 +106,6 @@ export class MongodbUserRepository implements IUserRepository {
             }
         }
     }
-    
     
     public async deleteUser(id: string): Promise<void> {
         
