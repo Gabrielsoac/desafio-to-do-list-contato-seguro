@@ -13,10 +13,10 @@ export class TaskBuilder implements ITaskBuilder {
     description: string;
     user: mongoose.Types.ObjectId;
 
-    private constructor(title: string, description: string, user: mongoose.Types.ObjectId){
-        this.title = title;
-        this.description = description;
-        this.user = user;
+    private constructor(data: ITaskBuilder){
+        this.title = data.title;
+        this.description = data.description;
+        this.user = data.user;
     }
 
     public static aTask(): TaskBuilder{
@@ -24,22 +24,24 @@ export class TaskBuilder implements ITaskBuilder {
         const description = "Description Mocked";
         const user = new mongoose.Types.ObjectId('64a9f8b5f2a1e2b3c4d56789');
 
-        return new TaskBuilder(title, description, user);
+        return new TaskBuilder({
+            title, description, user
+        });
     }
 
     public withTitle(title: string): TaskBuilder {
-        this.title = title;
-        return this;
+        return new TaskBuilder({
+            ...this, title
+        });
+
     }
 
     public withDescription(description: string): TaskBuilder {
-        this.description = description;
-        return this;
+        return {...this, description}
     }
 
     public withUser(user: mongoose.Types.ObjectId): TaskBuilder {
-        this.user = user;
-        return this;
+        return {...this, user}
     }
 
     public build(): Task {
