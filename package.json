@@ -4,7 +4,7 @@
   "description": "To-Do List Application",
   "main": "index.js",
   "scripts": {
-    "test": "jest --config jest.config.ts",
+    "test": "jest --config --detectOpenHandles jest.config.ts",
     "dev": "npx tsx src/index.ts"
   },
   "repository": {

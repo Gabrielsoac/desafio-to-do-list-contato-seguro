@@ -18,7 +18,7 @@ export const CreateUserController = async (
         const locationUrl = `${req.protocol}://${req.get('host')}/user/${user.id}`;
 
         res.status(StatusCodes.CREATED).location(locationUrl).json(user);
-    } 
+    }
     catch(err){
         next(err);
     }

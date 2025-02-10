@@ -1,0 +1,46 @@
+name: CI for Task App
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    services:
+      mongodb:
+        image: mongo:5.0
+        ports:
+          - 27017:27017
+        env:
+          MONGO_INITDB_ROOT_USERNAME: TESTE
+          MONGO_INITDB_ROOT_PASSWORD: TESTE123
+        options: > 
+          --health-cmd "mongo --eval 'db.runCommand({ ping: 1 })'" 
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+          
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '23'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run tests
+        env:
+          MONGODB_URL: mongodb://localhost:27017/task
+          MONGODB_USER: TESTE
+          MONGODB_PASSWORD: TESTE123
+        run: npm test
