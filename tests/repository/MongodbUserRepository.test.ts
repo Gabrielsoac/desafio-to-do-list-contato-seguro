@@ -3,8 +3,8 @@ import { MongodbUserRepository } from '../../src/infra/repository/user/MongodbUs
 import { User } from '../../src/domain/entities/user/User';
 import { UserAlreadyExistsError } from '../../src/errors/user/UserAlreadyExistsError';
 import { CreateOutputPersistedUser } from '../../src/infra/repository/user/CreateOutputPersistedUser';
-import { UserBuilder } from '../builders/UserBuilder';
-import { UserPersistedBuilder } from '../builders/UserPersistedBuilder';
+import { UserBuilder } from '../builders/user/UserBuilder';
+import { UserPersistedBuilder } from '../builders/user/UserPersistedBuilder';
 import { UserNotFoundError } from '../../src/errors/user/UserNotFoundError';
 jest.mock('../../src/models/UserModel');
 

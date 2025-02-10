@@ -1,4 +1,4 @@
-import { User } from "../../src/domain/entities/user/User";
+import { User } from "../../../src/domain/entities/user/User";
 
 export interface IUserBuilder {
     name: string;
