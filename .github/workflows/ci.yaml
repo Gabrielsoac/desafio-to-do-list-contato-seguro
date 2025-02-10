@@ -20,8 +20,6 @@ jobs:
         env:
           MONGO_INITDB_ROOT_USERNAME: TESTE
           MONGO_INITDB_ROOT_PASSWORD: TESTE123
-        options: > 
-          --bind_ip_all
           
     steps:
       - name: Checkout the repository
