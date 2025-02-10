@@ -59,7 +59,7 @@ classDiagram
 
   Faça um clone do projeto
   ```
-  git clone https://github.com/Gabrielsoac/desafio-to-do-list-contato-seguro
+  git clone https://github.com/Gabrielsoac/desafio-to-do-list-contato-seguro.git
   ```
  
   Com o Docker instalado, utilize o comando para iniciar o projeto:
