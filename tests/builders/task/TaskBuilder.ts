@@ -1,29 +1,28 @@
 import mongoose from 'mongoose';
-import { Task} from '../../../src/domain/entities/task/Task';
+import { Task } from '../../../src/domain/entities/task/Task';
 
 export interface ITaskBuilder {
     title: string;
     description: string;
-    user: string
+    user: mongoose.Types.ObjectId
 }
 
 export class TaskBuilder implements ITaskBuilder {
     
     title: string;
     description: string;
-    user: string;
+    user: mongoose.Types.ObjectId;
 
-    private constructor(title: string, description: string, user: string){
+    private constructor(title: string, description: string, user: mongoose.Types.ObjectId){
         this.title = title;
         this.description = description;
         this.user = user;
     }
 
-    public static aUser(){
-
+    public static aTask(): TaskBuilder{
         const title = "Mocked";
         const description = "Description Mocked";
-        const user = "1234567890098765432112";
+        const user = new mongoose.Types.ObjectId('64a9f8b5f2a1e2b3c4d56789');
 
         return new TaskBuilder(title, description, user);
     }
@@ -38,7 +37,7 @@ export class TaskBuilder implements ITaskBuilder {
         return this;
     }
 
-    public withUser(user: string): TaskBuilder {
+    public withUser(user: mongoose.Types.ObjectId): TaskBuilder {
         this.user = user;
         return this;
     }
@@ -47,7 +46,7 @@ export class TaskBuilder implements ITaskBuilder {
         return Task.create(
             this.title,
             this.description,
-            new mongoose.Types.ObjectId(this.user),
+            this.user
         );
     }
 } 

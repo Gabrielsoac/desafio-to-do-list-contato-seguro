@@ -7,18 +7,18 @@ export interface ITaskPersistedBuilder {
     description?: string;
     status?: TaskStatus;
     user: mongoose.Types.ObjectId;
-    createdAt?: Date,
-    updatedAt?: Date
+    createdAt?: string,
+    updatedAt?: string
 }
 
-export class TaskPersistedBuilder implements ITaskPersistedBuilder {
+export class TaskPersistedFormatedBuilder implements ITaskPersistedBuilder {
     id: string;
     title: string;
     description?: string | undefined;
     status?: TaskStatus | undefined;
     user: mongoose.Types.ObjectId;
-    createdAt?: Date | undefined;
-    updatedAt?: Date | undefined;
+    createdAt?: string | undefined;
+    updatedAt?: string | undefined;
 
     private constructor(input: ITaskPersistedBuilder){
       this.id = input.id;
@@ -34,12 +34,12 @@ export class TaskPersistedBuilder implements ITaskPersistedBuilder {
       const id = '64a9f8b5f2a1e2b3c4d56788';
       const title = "Mocked";
       const description = "Description Mocked";
-      const status = TaskStatus.IN_PROGRESS;
+      const status = TaskStatus.PENDING;
       const user = new mongoose.Types.ObjectId('64a9f8b5f2a1e2b3c4d56789');
-      const createdAt = new Date(Date.UTC(2025, 1, 10, 11, 53));
-      const updatedAt = new Date((Date.UTC(2025, 1, 10, 11, 53)));
+      const createdAt = '10 de Fevereiro de 2025 às 11:53';
+      const updatedAt = '10 de Fevereiro de 2025 às 11:53';
 
-      return new TaskPersistedBuilder({
+      return new TaskPersistedFormatedBuilder({
         id: id,
         title: title,
         description: description,
@@ -50,37 +50,37 @@ export class TaskPersistedBuilder implements ITaskPersistedBuilder {
       });
     }
 
-    public withId(id: string): TaskPersistedBuilder {
+    public withId(id: string): TaskPersistedFormatedBuilder {
       this.id = id;
       return this;
     }
 
-      public withTitle(title: string): TaskPersistedBuilder {
+      public withTitle(title: string): TaskPersistedFormatedBuilder {
         this.title = title;
         return this;
       }
     
-      public withDescription(description: string): TaskPersistedBuilder {
+      public withDescription(description: string): TaskPersistedFormatedBuilder {
         this.description = description;
         return this;
       }
     
-      public withStatus(status: TaskStatus): TaskPersistedBuilder {
+      public withStatus(status: TaskStatus): TaskPersistedFormatedBuilder {
         this.status = status;
         return this;
       }
     
-      public withUser(user: mongoose.Types.ObjectId): TaskPersistedBuilder {
+      public withUser(user: mongoose.Types.ObjectId): TaskPersistedFormatedBuilder {
         this.user = user;
         return this;
       }
     
-      public withCreatedAt(createdAt: Date): TaskPersistedBuilder {
+      public withCreatedAt(createdAt: string): TaskPersistedFormatedBuilder {
         this.createdAt = createdAt;
         return this;
       }
     
-      public withUpdatedAt(updatedAt: Date): TaskPersistedBuilder {
+      public withUpdatedAt(updatedAt: string): TaskPersistedFormatedBuilder {
         this.updatedAt = updatedAt;
         return this;
       }
