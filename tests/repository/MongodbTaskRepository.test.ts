@@ -33,6 +33,20 @@ describe(
         ).toEqual(taskPersistedFormated)
       }
     )
+
+    it (
+      'should to throw Error when INTERNAL SERVER ERROR',
+      async () => {
+
+        const taskRepository = new MongoDBTaskRepository();
+
+        const task = TaskBuilder.aTask().build();
+        TaskModel.create = jest.fn().mockRejectedValue(task);
+        
+        await expect(
+          taskRepository.save(task)).rejects.toThrow(Error('Erro ao salvar usuário'));
+      }
+    );
   }
 );
   
