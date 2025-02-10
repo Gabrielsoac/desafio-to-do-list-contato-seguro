@@ -76,6 +76,7 @@ export class MongodbUserRepository implements IUserRepository {
     
             
             const existingUser = await UserModel.findOne({ email: userUpdateData.email });
+
             if (existingUser && existingUser._id.toString() !== userUpdateData.id) {
                 throw new UserAlreadyExistsError("Usuário com este email já existe");
             }

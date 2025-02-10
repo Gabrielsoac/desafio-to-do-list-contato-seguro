@@ -1,1 +1,5 @@
-console.log("Initial configs");
+afterEach(() => {
+    jest.clearAllMocks();
+});
+
+jest.setTimeout(10000);
