@@ -5,8 +5,3 @@ export const healthCheck = (_: Request, res: Response) => {
     console.log("OK: HEALTH CHECKED");
     res.status(StatusCodes.OK).end();
 }
-
-export const healthCors = {
-    origin: '*',
-    methods: ['GET'],
-}

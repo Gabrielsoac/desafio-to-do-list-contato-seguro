@@ -1,4 +1,5 @@
 import { Router } from 'express';
+import cors from 'cors';
 
 import { CreateTaskController } from '../controllers/task/CreateTaskController';
 import { FindAllTasksController } from '../controllers/task/FindAllTasksController';
@@ -9,11 +10,18 @@ import { CreateTaskDataValidation } from '../infra/middleware/task/CreateTaskDat
 import { DeleteTaskDataValidation } from '../infra/middleware/task/DeleteTaskDataValidation';
 import { UpdateTaskByIdDataValidation } from '../infra/middleware/task/UpdateTaskDataValidation';
 import { FindAllTasksByUserController } from '../controllers/task/FindAllTasksByUserController';
+import { CreateTaskCors } from '../controllers/cors/task/CreateTaskCors';
+import { GetTasksCors } from '../controllers/cors/task/GetTasksCors';
+import { DeleteTaskCors } from '../controllers/cors/task/DeleteTaskCors';
+import { UpdateTaskCors } from '../controllers/cors/task/UpdateTaskCors';
+import { GetTasksByUserCors } from '../controllers/cors/task/GetTasksByUserCors';
+
 
 const TaskRoutes = Router();
 
 TaskRoutes.post(
     '/task',
+    cors(CreateTaskCors),
     CreateTaskDataValidation,
     CreateTaskController
 
@@ -109,6 +117,7 @@ TaskRoutes.post(
 
 TaskRoutes.get(
     '/task',
+    cors(GetTasksCors),
     FindAllTasksController
 
     //Documentação com Swagger 2.0
@@ -152,6 +161,7 @@ TaskRoutes.get(
 
 TaskRoutes.delete(
     '/task/:id',
+    cors(DeleteTaskCors),
     DeleteTaskDataValidation,
     DeleteTaskController
 
@@ -200,6 +210,7 @@ TaskRoutes.delete(
 
 TaskRoutes.put(
     '/task/:id',
+    cors(UpdateTaskCors),
     UpdateTaskByIdDataValidation,
     UpdateTaskController
 
@@ -295,6 +306,7 @@ TaskRoutes.put(
 
 TaskRoutes.get(
     '/task/user/:id',
+    cors(GetTasksByUserCors),
     FindUserByIdDataValidation,
     FindAllTasksByUserController
 

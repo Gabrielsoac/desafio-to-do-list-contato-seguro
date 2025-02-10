@@ -1,10 +1,13 @@
 import { Router } from 'express';
+import cors from 'cors';
 import { healthCheck } from '../controllers/healthController';
+import { HealthCors } from '../controllers/cors/health/HealthCors';
 
 const HealthCheckRoutes = Router();
 
 HealthCheckRoutes.get(
     '/health',
+    cors(HealthCors),
     healthCheck
 
     // #swagger.auto = false

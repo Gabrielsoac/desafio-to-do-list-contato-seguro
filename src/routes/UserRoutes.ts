@@ -1,4 +1,6 @@
 import { Router } from 'express';
+import cors from 'cors';
+
 import { CreateUserDataValidation } from '../infra/middleware/user/CreateUserDataValidation';
 import { CreateUserController } from '../controllers/user/CreateUserController';
 import { FindUserByIdDataValidation } from '../infra/middleware/user/FindUserByIdDataValidation';
@@ -8,11 +10,17 @@ import { UpdateUserByIdDataValidation } from '../infra/middleware/user/UpdateUse
 import { UpdateUserController } from '../controllers/user/UpdateUserController';
 import { DeleteUserByIdDataValidation } from '../infra/middleware/user/DeleteUserDataValidation';
 import { DeleteUserController } from '../controllers/user/DeleteUserController';
+import { CreateUserCors } from '../controllers/cors/user/CreateUserCors';
+import { GetUserByIdCors } from '../controllers/cors/user/GetUserByIdCors';
+import { GetUsersCors } from '../controllers/cors/user/GetUsersCors';
+import { UpdateUserByIdCors } from '../controllers/cors/user/UpdateUserByIdCors';
+import { DeleteUserByIdCors } from '../controllers/cors/user/DeleteUserByIdCors';
 
 const UserRoutes = Router();
 
 UserRoutes.post(
     '/user',
+    cors(CreateUserCors),
     CreateUserDataValidation,
     CreateUserController
 
@@ -102,6 +110,7 @@ UserRoutes.post(
 
 UserRoutes.get(
     '/user/:id',
+    cors(GetUserByIdCors),
     FindUserByIdDataValidation,
     GetUserByIdController
 
@@ -147,6 +156,7 @@ UserRoutes.get(
 
 UserRoutes.get(
     '/user',
+    cors(GetUsersCors),
     GetUsersController
 
     // Documentação com Swagger 2.0
@@ -185,6 +195,7 @@ UserRoutes.get(
 
 UserRoutes.put(
     '/user/:id',
+    cors(UpdateUserByIdCors),
     UpdateUserByIdDataValidation,
     UpdateUserController
    
@@ -283,6 +294,7 @@ UserRoutes.put(
 
 UserRoutes.delete(
     '/user/:id',
+    cors(DeleteUserByIdCors),
     DeleteUserByIdDataValidation,
     DeleteUserController
 
