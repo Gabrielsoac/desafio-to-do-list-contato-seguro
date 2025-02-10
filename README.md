@@ -26,6 +26,30 @@ Criar uma API RESTful para um sistema simples de gerenciamento de tarefas (To-Do
   - A escolha da arquitetura foi baseada em Clean Architecture em módulos organizados por contexto e aplicação de SOLID.
   -  A inicialização do container via Docker Compose valida a saúde da API via health check em `/health`.
 
+#### Decisão de Arquitetura de Dependência (Controller - Use Case - Interface)
+
+```mermaid
+classDiagram
+    direction LR
+
+    class Controller {
+    }
+
+    class UseCase {
+    }
+
+    class RepositoryInterface {
+        <<interface>>
+    }
+
+    class RepositoryImpl {
+    }
+
+    Controller --> UseCase : depende de
+    UseCase --> RepositoryInterface : depende de
+    RepositoryInterface <|-- RepositoryImpl : implementa
+
+```
 ## Comece por aqui (Linux Debian)
 
    > Este guia foi projetado para funcionar via CLI em Sistemas Operacionais baseados em Debian, caso tenha um sistema operacional diferente, adapte ao seu sistema.
@@ -46,26 +70,24 @@ Criar uma API RESTful para um sistema simples de gerenciamento de tarefas (To-Do
   docker compose down
   ```
 
+  ### Caso tenha erros com a porta 27017
+
   Caso ocorra algum problema de "port already in use", o projeto utiliza a porta 27017 para executar o banco de dados (Padrão do Mongodb).
   Lembre-se de fechar qualquer serviço que esteja utilizando essa porta
-
-  ### Caso tenha erros com a porta 27017
+  
   Utilize o comando:
   ```
   sudo systemctl stop mongod
   ```
   Isso pausará o mongodb do seu host, mas não se preocupe, após testar a API, poderá ativar seu mongodb local novamente com o comando:
 
-```
+  ```
   sudo systemctl start mongod
   ```
-
-  
-  ## END-POINTS
-  > Com o projeto rodando utilize o swagger para realizar testes nos end-points! No navegador digite: `http://localhost:3000/api-docs`
+  ## Como Testar
+  Com o projeto rodando utilize o swagger para realizar testes nos end-points! No navegador digite: `http://localhost:3000/api-docs`
 
 ### Ferramentas Utilizadas
-
 - TypeScript para Desenvolvimento com NodeJs
 - ExpressJS como servidor web
 - Mongoose (MongoDB) como banco de dados (ORM) 
