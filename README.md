@@ -57,6 +57,10 @@ classDiagram
   ### O Projeto pode ser executado utilizando Docker Compose (RECOMENDADO)
   - Caso não saiba como instalar e configurar o Docker, siga a documentação: https://docs.docker.com/engine/install/
 
+  Faça um clone do projeto
+  ```
+  git clone https://github.com/Gabrielsoac/desafio-to-do-list-contato-seguro
+  ```
  
   Com o Docker instalado, utilize o comando para iniciar o projeto:
   > Lembre-se de navegar até a pasta que contém o docker-compose.yaml
